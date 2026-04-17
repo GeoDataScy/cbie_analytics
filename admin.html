@@ -452,7 +452,7 @@ body.feedback-mode .nav-subitem .dot{display:none;}
       <p class="subtitle">Acesse o painel de administracao de dados</p>
       <div class="form-group">
         <label>E-mail</label>
-        <input type="email" id="loginEmail" placeholder="nome@cbie.com.br" autocomplete="email">
+        <input type="email" id="loginEmail" placeholder="admin@cbie.com.br" autocomplete="email">
       </div>
       <div class="form-group">
         <label>Senha</label>
@@ -1063,18 +1063,10 @@ async function doLogin() {
     return;
   }
 
-  // Auth OK — populate sidebar with real user info
-  const name   = data.user.user_metadata?.name || email.split('@')[0];
-  const initials = name.substring(0, 2).toUpperCase();
-  document.getElementById('sidebarAvatar').textContent = initials;
-  document.getElementById('sidebarName').textContent   = name;
+  // Auth OK — populate sidebar
+  document.getElementById('sidebarAvatar').textContent = 'CB';
+  document.getElementById('sidebarName').textContent   = 'Admin CBIE';
   document.getElementById('sidebarEmail').textContent  = email;
-
-  // Auto-select user in feedback panel
-  selectedFbUser = name;
-  document.querySelectorAll('.fb-user-pill').forEach(p => {
-    p.classList.toggle('selected', p.textContent.trim() === name);
-  });
 
   document.getElementById('loginScreen').classList.add('hidden');
   document.getElementById('dashboard').classList.add('visible');
@@ -1102,15 +1094,9 @@ document.getElementById('loginPassword').addEventListener('keydown', e => { if(e
 // Restore session on reload
 fbSupabase.auth.getSession().then(({ data: { session } }) => {
   if (!session) return;
-  const name    = session.user.user_metadata?.name || session.user.email.split('@')[0];
-  const initials = name.substring(0, 2).toUpperCase();
-  document.getElementById('sidebarAvatar').textContent = initials;
-  document.getElementById('sidebarName').textContent   = name;
+  document.getElementById('sidebarAvatar').textContent = 'CB';
+  document.getElementById('sidebarName').textContent   = 'Admin CBIE';
   document.getElementById('sidebarEmail').textContent  = session.user.email;
-  selectedFbUser = name;
-  document.querySelectorAll('.fb-user-pill').forEach(p => {
-    p.classList.toggle('selected', p.textContent.trim() === name);
-  });
   document.getElementById('loginScreen').classList.add('hidden');
   document.getElementById('dashboard').classList.add('visible');
   setTimeout(() => initDashboard(), 100);
