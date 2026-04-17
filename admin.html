@@ -2567,7 +2567,7 @@ async function loadFbHistory() {
 
   const { data, error } = await fbSupabase
     .from('feedback_responses')
-    .select('section_id, section_name, url_fonte, o_que_melhoraria, observacoes, submitted_at')
+    .select('section_id, section_name, url_fonte, o_que_melhoraria, observacoes, image_url, submitted_at')
     .eq('user_name', selectedFbUser)
     .order('submitted_at', { ascending: false });
 
