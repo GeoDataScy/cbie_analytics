@@ -305,75 +305,74 @@ body{font-family:var(--font-body);background:var(--gray-50);color:var(--navy-900
 .btn-feedback:hover{border-color:var(--amber-400);color:#D97706;}
 .btn-feedback.active{background:rgba(251,191,36,.1);border-color:var(--amber-400);color:#D97706;}
 .btn-feedback.active svg{animation:pulse 2s infinite;}
-.fb-dot{display:none;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18);margin-left:auto;flex-shrink:0;transition:all .3s;}
-.fb-dot.annotated{background:var(--teal-400);box-shadow:0 0 0 3px rgba(0,212,188,.2);}
+.fb-dot{display:none;width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18);margin-left:auto;flex-shrink:0;transition:all .3s;}
+.fb-dot.annotated{background:var(--teal-400);box-shadow:0 0 0 3px rgba(0,212,188,.18);}
 body.feedback-mode .nav-item .fb-dot,body.feedback-mode .nav-subitem .fb-dot{display:flex;}
 body.feedback-mode .nav-item:hover .fb-dot:not(.annotated),
 body.feedback-mode .nav-subitem:hover .fb-dot:not(.annotated){background:var(--amber-400);}
 body.feedback-mode .nav-subitem .dot{display:none;}
 
-/* Right panel */
-.fb-panel{position:fixed;right:-460px;top:68px;bottom:0;width:420px;background:var(--white);box-shadow:-12px 0 60px rgba(10,22,40,.14);z-index:200;transition:right .4s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;border-left:1px solid var(--gray-100);}
+/* ── Right panel shell ── */
+.fb-panel{position:fixed;right:-450px;top:68px;bottom:0;width:420px;background:var(--white);box-shadow:-16px 0 60px rgba(10,22,40,.12);z-index:200;transition:right .4s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;border-left:1px solid var(--gray-100);}
 .fb-panel.open{right:0;}
-.fb-panel-header{padding:22px 24px 16px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;}
+
+/* Header */
+.fb-panel-header{padding:18px 20px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .fb-panel-tag{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--amber-400);font-weight:700;}
-.fb-panel-close{width:32px;height:32px;border-radius:8px;border:none;background:var(--gray-100);color:var(--gray-400);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:14px;flex-shrink:0;}
+.fb-panel-progress{font-size:11px;font-weight:700;color:var(--teal-500);background:rgba(0,180,160,.08);padding:3px 10px;border-radius:20px;}
+.fb-panel-close{width:30px;height:30px;border-radius:8px;border:none;background:var(--gray-100);color:var(--gray-400);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:13px;flex-shrink:0;}
 .fb-panel-close:hover{background:var(--gray-200);color:var(--navy-900);}
 
 /* User selector strip */
-.fb-user-strip{padding:16px 24px;border-bottom:1px solid var(--gray-100);background:var(--gray-50);}
-.fb-user-strip-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray-400);font-weight:700;margin-bottom:10px;}
-.fb-user-pills{display:flex;flex-wrap:wrap;gap:7px;}
-.fb-user-pill{padding:6px 16px;border-radius:20px;border:1.5px solid var(--gray-200);background:var(--white);font-size:12px;font-weight:600;color:var(--gray-500);cursor:pointer;transition:all .2s;}
+.fb-user-strip{padding:14px 20px;border-bottom:1px solid var(--gray-100);background:var(--gray-50);flex-shrink:0;}
+.fb-user-strip-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray-400);font-weight:700;margin-bottom:9px;}
+.fb-user-pills{display:flex;flex-wrap:wrap;gap:6px;}
+.fb-user-pill{padding:5px 14px;border-radius:20px;border:1.5px solid var(--gray-200);background:var(--white);font-size:12px;font-weight:600;color:var(--gray-500);cursor:pointer;transition:all .2s;}
 .fb-user-pill:hover{border-color:var(--teal-400);color:var(--teal-500);}
 .fb-user-pill.selected{background:var(--navy-900);border-color:var(--navy-900);color:var(--white);}
 
-/* Panel body */
-.fb-panel-body{flex:1;overflow-y:auto;padding:24px;}
-.fb-empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;color:var(--gray-300);}
-.fb-empty-arrow{font-size:28px;margin-bottom:12px;opacity:.4;}
-.fb-empty-text{font-size:13px;line-height:1.6;max-width:200px;}
-.fb-section-name{font-family:var(--font-display);font-size:20px;color:var(--navy-900);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--gray-100);}
-.fb-field-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray-500);margin-bottom:7px;display:flex;align-items:center;gap:5px;}
-.fb-field-input,.fb-field-textarea{width:100%;padding:11px 13px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13px;font-family:var(--font-body);color:var(--navy-900);background:var(--gray-50);outline:none;transition:all .25s;margin-bottom:18px;}
+/* Scrollable body */
+.fb-panel-body{flex:1;overflow-y:auto;display:flex;flex-direction:column;}
+.fb-panel-body::-webkit-scrollbar{width:4px;}
+.fb-panel-body::-webkit-scrollbar-thumb{background:var(--gray-200);border-radius:2px;}
+
+/* Empty state */
+.fb-empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;text-align:center;color:var(--gray-300);padding:40px 24px;}
+.fb-empty-icon{font-size:32px;margin-bottom:12px;opacity:.35;}
+.fb-empty-text{font-size:13px;line-height:1.7;max-width:180px;}
+
+/* Annotation form area */
+.fb-form-area{padding:20px 20px 0;}
+.fb-section-header{display:flex;align-items:flex-start;gap:10px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--gray-100);}
+.fb-section-color{width:4px;border-radius:2px;flex-shrink:0;align-self:stretch;min-height:32px;}
+.fb-section-name{font-family:var(--font-display);font-size:18px;color:var(--navy-900);line-height:1.2;flex:1;}
+.fb-field-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray-400);margin-bottom:7px;}
+.fb-field-input,.fb-field-textarea{width:100%;padding:10px 12px;border:1.5px solid var(--gray-200);border-radius:9px;font-size:13px;font-family:var(--font-body);color:var(--navy-900);background:var(--gray-50);outline:none;transition:all .25s;margin-bottom:16px;}
 .fb-field-input:focus,.fb-field-textarea:focus{border-color:var(--teal-500);background:var(--white);box-shadow:0 0 0 3px rgba(0,180,160,.08);}
 .fb-field-input::placeholder,.fb-field-textarea::placeholder{color:var(--gray-300);}
-.fb-field-textarea{resize:vertical;min-height:80px;}
+.fb-field-textarea{resize:vertical;min-height:78px;}
 
-/* Colegas annotations */
-.fb-colegas-divider{display:flex;align-items:center;gap:10px;margin:4px 0 16px;}
-.fb-colegas-divider span{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray-300);font-weight:700;white-space:nowrap;}
-.fb-colegas-divider::before,.fb-colegas-divider::after{content:'';flex:1;height:1px;background:var(--gray-100);}
-.fb-colega-card{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:10px;padding:12px 14px;margin-bottom:10px;}
-.fb-colega-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.fb-colega-avatar{width:24px;height:24px;border-radius:50%;background:var(--navy-700);color:var(--teal-400);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.fb-colega-name{font-size:12px;font-weight:600;color:var(--navy-900);}
-.fb-colega-row{font-size:12px;color:var(--gray-500);margin-bottom:4px;line-height:1.5;}
-.fb-colega-row strong{color:var(--gray-600);font-weight:600;}
-.fb-colega-url{font-size:11px;color:var(--teal-500);word-break:break-all;}
+/* Footer (save bar) */
+.fb-panel-footer{padding:14px 20px;border-top:1px solid var(--gray-100);display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.fb-btn-save{padding:9px 20px;border-radius:8px;background:var(--navy-900);color:var(--white);font-size:13px;font-weight:600;font-family:var(--font-body);border:none;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:7px;}
+.fb-btn-save:hover{background:var(--navy-700);}
+.fb-btn-save:disabled{opacity:.5;cursor:default;}
+.fb-sent-badge{display:none;align-items:center;gap:5px;font-size:11px;color:var(--green-400);font-weight:700;padding:5px 11px;background:rgba(52,211,153,.08);border-radius:8px;border:1px solid rgba(52,211,153,.18);}
+.fb-sent-badge.show{display:flex;}
 
-/* Saved badge */
-.fb-saved-badge{display:none;align-items:center;gap:6px;font-size:11px;color:var(--green-400);font-weight:600;padding:6px 12px;background:rgba(52,211,153,.08);border-radius:8px;border:1px solid rgba(52,211,153,.2);}
-.fb-saved-badge.show{display:flex;}
-.fb-panel-footer{padding:16px 24px;border-top:1px solid var(--gray-100);display:flex;align-items:center;gap:10px;}
-
-/* Bottom drawer (manual only) */
-.fb-drawer{position:fixed;bottom:-280px;left:var(--sidebar-w);right:0;height:280px;background:var(--white);border-top:2px solid var(--amber-400);box-shadow:0 -12px 60px rgba(10,22,40,.12);z-index:150;transition:bottom .4s cubic-bezier(0.4,0,0.2,1);}
-.fb-drawer.open{bottom:0;}
-.fb-drawer-handle{position:absolute;top:-34px;left:50%;transform:translateX(-50%);background:var(--white);border:2px solid var(--amber-400);border-bottom:none;border-radius:10px 10px 0 0;padding:6px 24px 2px;cursor:pointer;display:flex;align-items:center;gap:8px;color:#D97706;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap;}
-.fb-drawer-inner{display:grid;grid-template-columns:1fr 200px;gap:36px;padding:24px 36px 28px;height:100%;align-items:start;}
-.fb-col-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--gray-400);font-weight:700;margin-bottom:12px;}
-.fb-progress{margin-bottom:0;}
-.fb-progress-bar{height:4px;background:var(--gray-100);border-radius:2px;margin-top:6px;overflow:hidden;}
-.fb-progress-fill{height:100%;background:linear-gradient(90deg,var(--teal-500),var(--teal-300));border-radius:2px;transition:width .6s ease;}
-.fb-obs-col{display:flex;flex-direction:column;}
-.fb-obs-textarea{width:100%;padding:12px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13px;font-family:var(--font-body);color:var(--navy-900);background:var(--gray-50);resize:none;outline:none;transition:all .25s;height:160px;}
-.fb-obs-textarea:focus{border-color:var(--teal-500);background:var(--white);box-shadow:0 0 0 3px rgba(0,180,160,.08);}
-.fb-obs-textarea::placeholder{color:var(--gray-300);}
-.fb-actions-col{display:flex;flex-direction:column;gap:10px;}
-.fb-count-card{text-align:center;padding:12px;background:var(--gray-50);border-radius:12px;border:1px solid var(--gray-100);}
-.fb-count-number{font-family:var(--font-display);font-size:30px;color:var(--navy-900);line-height:1;}
-.fb-count-label{font-size:10px;color:var(--gray-400);margin-top:3px;}
+/* History section */
+.fb-history{padding:20px;}
+.fb-history-divider{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.fb-history-divider::before,.fb-history-divider::after{content:'';flex:1;height:1px;background:var(--gray-100);}
+.fb-history-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray-300);font-weight:700;white-space:nowrap;}
+.fb-history-count{font-size:10px;font-weight:700;color:var(--white);background:var(--teal-500);padding:2px 7px;border-radius:10px;}
+.fb-hist-card{display:flex;align-items:stretch;gap:0;border:1px solid var(--gray-100);border-radius:10px;margin-bottom:8px;cursor:pointer;transition:all .2s;overflow:hidden;background:var(--white);}
+.fb-hist-card:hover{border-color:var(--gray-200);box-shadow:var(--shadow-sm);transform:translateX(-2px);}
+.fb-hist-bar{width:4px;flex-shrink:0;}
+.fb-hist-content{padding:10px 13px;flex:1;min-width:0;}
+.fb-hist-name{font-size:12px;font-weight:600;color:var(--navy-900);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.fb-hist-snippet{font-size:11px;color:var(--gray-400);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.fb-hist-url{font-size:10px;color:var(--teal-500);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 </style>
 </head>
 <body>
@@ -679,16 +678,22 @@ body.feedback-mode .nav-subitem .dot{display:none;}
   </div>
 </div>
 
-<!-- ═══════════ ANNOTATION PANEL ═══════════ -->
+<!-- ═══════════ FEEDBACK PANEL ═══════════ -->
 <div class="fb-panel" id="fbPanel">
+
+  <!-- Header -->
   <div class="fb-panel-header">
-    <div class="fb-panel-tag">&#9998;&nbsp; Modo Feedback</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="fb-panel-tag">&#9998;&nbsp; Feedback</div>
+      <div class="fb-panel-progress" id="fbPanelProgress">0 anotacoes</div>
+    </div>
     <button class="fb-panel-close" onclick="closeFbPanel()">&#10005;</button>
   </div>
+
   <!-- User selector -->
   <div class="fb-user-strip">
     <div class="fb-user-strip-label">Quem esta respondendo?</div>
-    <div class="fb-user-pills" id="fbUserPills">
+    <div class="fb-user-pills">
       <div class="fb-user-pill" onclick="selectFbUser(this,'Pedro')">Pedro</div>
       <div class="fb-user-pill" onclick="selectFbUser(this,'Gustavo')">Gustavo</div>
       <div class="fb-user-pill" onclick="selectFbUser(this,'Bernardo')">Bernardo</div>
@@ -696,68 +701,55 @@ body.feedback-mode .nav-subitem .dot{display:none;}
       <div class="fb-user-pill" onclick="selectFbUser(this,'Bruno')">Bruno</div>
     </div>
   </div>
-  <!-- Body -->
-  <div class="fb-panel-body" id="fbPanelBody">
-    <!-- Empty state -->
-    <div class="fb-empty-state" id="fbEmptyState">
-      <div class="fb-empty-arrow">&#8592;</div>
-      <div class="fb-empty-text">Selecione uma secao na sidebar para comecar a anotar</div>
-    </div>
-    <!-- Annotation form -->
-    <div id="fbAnnotationForm" style="display:none;">
-      <div class="fb-section-name" id="fbSectionName"></div>
-      <div class="fb-field-label">&#127760;&nbsp; Qual site voce usa para buscar esses dados?</div>
-      <input class="fb-field-input" type="url" id="fbUrl" placeholder="https://..." oninput="autoSaveFb()">
-      <div class="fb-field-label">&#128161;&nbsp; O que voce melhoraria nesta secao?</div>
-      <textarea class="fb-field-textarea" id="fbMelhoria" placeholder="Descreva sua sugestao de melhoria..." oninput="autoSaveFb()"></textarea>
-      <div class="fb-field-label">&#128203;&nbsp; Observacoes livres</div>
-      <textarea class="fb-field-textarea" id="fbObs" placeholder="Qualquer outra observacao..." oninput="autoSaveFb()"></textarea>
-      <!-- Colegas -->
-      <div id="fbColegasArea"></div>
-    </div>
-  </div>
-  <!-- Footer -->
-  <div class="fb-panel-footer" id="fbPanelFooter" style="display:none;">
-    <button class="btn btn-teal btn-sm" onclick="saveFbSection()">Salvar</button>
-    <div class="fb-saved-badge" id="fbSavedBadge">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      Salvo
-    </div>
-  </div>
-</div>
 
-<!-- ═══════════ FEEDBACK DRAWER ═══════════ -->
-<div class="fb-drawer" id="fbDrawer">
-  <div class="fb-drawer-handle" id="fbDrawerHandle" onclick="toggleFbDrawer()">
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
-    Resumo do Feedback
-    <span id="fbDrawerCount" style="background:var(--amber-400);color:var(--navy-900);font-size:10px;font-weight:800;padding:2px 7px;border-radius:10px;margin-left:4px;">0</span>
-  </div>
-  <div class="fb-drawer-inner">
-    <div>
-      <div class="fb-col-label">Progresso geral</div>
-      <div class="fb-progress">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-          <span style="font-size:12px;color:var(--gray-500);">Secoes com ao menos uma anotacao</span>
-          <span style="font-size:12px;font-weight:700;color:var(--teal-500);" id="fbProgressText">0 / 18</span>
+  <!-- Scrollable body -->
+  <div class="fb-panel-body" id="fbPanelBody">
+
+    <!-- Empty state (default) -->
+    <div class="fb-empty-state" id="fbEmptyState">
+      <div class="fb-empty-icon">&#8592;</div>
+      <div class="fb-empty-text">Selecione seu nome e clique em uma secao da sidebar para anotar</div>
+    </div>
+
+    <!-- Annotation form (shown when section selected) -->
+    <div id="fbAnnotationForm" style="display:none;">
+      <div class="fb-form-area">
+        <div class="fb-section-header">
+          <div class="fb-section-color" id="fbSectionColor"></div>
+          <div class="fb-section-name" id="fbSectionName"></div>
         </div>
-        <div class="fb-progress-bar"><div class="fb-progress-fill" id="fbProgressFill" style="width:0%"></div></div>
+        <div class="fb-field-label">Fonte dos dados (URL)</div>
+        <input class="fb-field-input" type="url" id="fbUrl" placeholder="https://...">
+        <div class="fb-field-label">O que voce melhoraria?</div>
+        <textarea class="fb-field-textarea" id="fbMelhoria" placeholder="Desceva sua sugestao de melhoria..."></textarea>
+        <div class="fb-field-label">Observacoes livres</div>
+        <textarea class="fb-field-textarea" id="fbObs" placeholder="Qualquer outra observacao..."></textarea>
       </div>
-      <div class="fb-col-label" style="margin-top:20px;">Observacao geral do sistema</div>
-      <textarea class="fb-obs-textarea" id="fbGlobalObs" placeholder="Comentarios gerais sobre o sistema, experiencia de uso, sugestoes globais..."></textarea>
     </div>
-    <div class="fb-actions-col">
-      <div class="fb-count-card">
-        <div class="fb-count-number" id="fbCountNumber">0</div>
-        <div class="fb-count-label">secoes anotadas</div>
+
+    <!-- History (always visible when user selected) -->
+    <div class="fb-history" id="fbHistory" style="display:none;">
+      <div class="fb-history-divider">
+        <span class="fb-history-label">Suas anotacoes</span>
+        <span class="fb-history-count" id="fbHistoryCount">0</span>
       </div>
-      <button class="btn btn-teal" style="width:100%;justify-content:center;" onclick="exportFeedback()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-        Enviar ao Supabase
-      </button>
-      <button class="btn btn-outline" style="width:100%;justify-content:center;" onclick="clearAllFeedback()">Limpar tudo</button>
+      <div id="fbHistoryList"></div>
+    </div>
+
+  </div>
+
+  <!-- Save footer (shown when section selected) -->
+  <div class="fb-panel-footer" id="fbPanelFooter" style="display:none;">
+    <button class="fb-btn-save" id="fbBtnSave" onclick="saveFbSection()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      Salvar
+    </button>
+    <div class="fb-sent-badge" id="fbSentBadge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Salvo no banco
     </div>
   </div>
+
 </div>
 
 <script>
@@ -2397,51 +2389,42 @@ const FB_SECTIONS = {
   'leg-agenda':         'Agenda Semanal'
 };
 
-const FB_USERS = ['Pedro','Gustavo','Bernardo','Luana','Bruno'];
-const FB_STORAGE_KEY = 'cbie_feedback_v1';
-const FB_GLOBAL_KEY  = 'cbie_feedback_global_v1';
+// sector color map
+const FB_COLORS = {
+  'dashboard-overview': '#00B4A0',
+  'se-carga':'#FBBF24','se-demanda':'#FBBF24','se-reservatorios':'#FBBF24',
+  'se-reserva':'#FBBF24','se-geracao':'#FBBF24','se-pld':'#FBBF24',
+  'pg-global':'#60A5FA','pg-brasil':'#60A5FA','pg-consumo':'#60A5FA',
+  'pg-precos':'#60A5FA','pg-gas':'#60A5FA',
+  'bc-biodiesel':'#34D399','bc-acucar':'#34D399','bc-precos':'#34D399',
+  'leg-projetos':'#F87171','leg-dou':'#F87171','leg-agenda':'#F87171'
+};
 
-let feedbackMode    = false;
+let feedbackMode     = false;
 let currentFbSection = null;
-let selectedFbUser  = null;
-let fbAutoSaveTimer = null;
-let fbDrawerOpen    = false;
-let fbDotsInjected  = false;
+let selectedFbUser   = null;
+let fbDotsInjected   = false;
+let fbHistory        = []; // cache local do historico do usuario atual
 
-// ─── localStorage helpers ───
-function fbLoad() {
-  try { return JSON.parse(localStorage.getItem(FB_STORAGE_KEY)) || {}; } catch { return {}; }
-}
-function fbSave(data) {
-  localStorage.setItem(FB_STORAGE_KEY, JSON.stringify(data));
-}
-function fbLoadGlobal() {
-  try { return JSON.parse(localStorage.getItem(FB_GLOBAL_KEY)) || {}; } catch { return {}; }
-}
-function fbSaveGlobal(data) {
-  localStorage.setItem(FB_GLOBAL_KEY, JSON.stringify(data));
-}
-
-// ─── Toggle feedback mode ───
+// ─── Toggle mode ───
 function toggleFeedbackMode() {
   feedbackMode = !feedbackMode;
   document.body.classList.toggle('feedback-mode', feedbackMode);
   const btn = document.getElementById('btnFeedback');
   if (feedbackMode) {
     btn.classList.add('active');
-    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Modo Visualizacao';
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Visualizacao';
     injectFbDots();
     document.getElementById('fbPanel').classList.add('open');
-    showToast('Modo Feedback ativado — selecione seu nome e clique em uma secao', 'success');
+    showToast('Modo Feedback ativado — selecione seu nome e uma secao', 'success');
   } else {
     btn.classList.remove('active');
     btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Modo Feedback';
     closeFbPanel();
-    closeFbDrawer();
   }
 }
 
-// ─── Inject annotation dots in sidebar ───
+// ─── Sidebar dots ───
 function injectFbDots() {
   if (fbDotsInjected) { refreshFbDots(); return; }
   document.querySelectorAll('.nav-item, .nav-subitem').forEach(el => {
@@ -2455,57 +2438,32 @@ function injectFbDots() {
 }
 
 function refreshFbDots() {
-  const data = fbLoad();
+  const annotated = new Set(fbHistory.map(r => r.section_id));
   document.querySelectorAll('[data-fbdot]').forEach(dot => {
-    const onclick = dot.parentElement.getAttribute('onclick') || '';
-    const match   = onclick.match(/showSection\('([^']+)'/);
-    if (!match) return;
-    const sec = data[match[1]];
-    const hasAny = sec && Object.values(sec).some(u => u.url_fonte || u.o_que_melhoraria || u.observacoes);
-    dot.classList.toggle('annotated', !!hasAny);
+    const m = (dot.parentElement.getAttribute('onclick') || '').match(/showSection\('([^']+)'/);
+    if (m) dot.classList.toggle('annotated', annotated.has(m[1]));
   });
 }
 
-// ─── Open annotation panel for a section ───
+// ─── Open annotation for a section ───
 function openAnnotation(sectionId) {
   currentFbSection = sectionId;
-  document.getElementById('fbEmptyState').style.display    = 'none';
-  document.getElementById('fbAnnotationForm').style.display = 'block';
-  document.getElementById('fbPanelFooter').style.display   = 'flex';
-  document.getElementById('fbSectionName').textContent      = FB_SECTIONS[sectionId] || sectionId;
-  loadCurrentUserFields(sectionId);
-  renderColegas(sectionId);
-  document.getElementById('fbSavedBadge').classList.remove('show');
-}
 
-function loadCurrentUserFields(sectionId) {
-  const data = fbLoad();
-  const u    = selectedFbUser ? (data[sectionId]?.[selectedFbUser] || {}) : {};
-  document.getElementById('fbUrl').value      = u.url_fonte || '';
-  document.getElementById('fbMelhoria').value = u.o_que_melhoraria || '';
-  document.getElementById('fbObs').value      = u.observacoes || '';
-}
+  document.getElementById('fbEmptyState').style.display     = 'none';
+  document.getElementById('fbAnnotationForm').style.display  = 'block';
+  document.getElementById('fbPanelFooter').style.display     = 'flex';
+  document.getElementById('fbSentBadge').classList.remove('show');
 
-function renderColegas(sectionId) {
-  const area = document.getElementById('fbColegasArea');
-  const data = fbLoad();
-  const sec  = data[sectionId] || {};
-  const outros = FB_USERS.filter(u => u !== selectedFbUser && (sec[u]?.url_fonte || sec[u]?.o_que_melhoraria || sec[u]?.observacoes));
-  if (outros.length === 0) { area.innerHTML = ''; return; }
-  area.innerHTML = '<div class="fb-colegas-divider"><span>Anotacoes dos colegas</span></div>'
-    + outros.map(u => {
-        const d = sec[u];
-        const initials = u.substring(0,2).toUpperCase();
-        return `<div class="fb-colega-card">
-          <div class="fb-colega-header">
-            <div class="fb-colega-avatar">${initials}</div>
-            <span class="fb-colega-name">${u}</span>
-          </div>
-          ${d.url_fonte ? `<div class="fb-colega-row"><strong>Fonte:</strong> <span class="fb-colega-url">${d.url_fonte}</span></div>` : ''}
-          ${d.o_que_melhoraria ? `<div class="fb-colega-row"><strong>Melhoria:</strong> ${d.o_que_melhoraria}</div>` : ''}
-          ${d.observacoes ? `<div class="fb-colega-row"><strong>Obs:</strong> ${d.observacoes}</div>` : ''}
-        </div>`;
-      }).join('');
+  const name  = FB_SECTIONS[sectionId] || sectionId;
+  const color = FB_COLORS[sectionId]   || '#00B4A0';
+  document.getElementById('fbSectionName').textContent       = name;
+  document.getElementById('fbSectionColor').style.background = color;
+
+  // Pre-fill if this user already annotated this section
+  const existing = fbHistory.find(r => r.section_id === sectionId);
+  document.getElementById('fbUrl').value      = existing?.url_fonte        || '';
+  document.getElementById('fbMelhoria').value = existing?.o_que_melhoraria || '';
+  document.getElementById('fbObs').value      = existing?.observacoes      || '';
 }
 
 function closeFbPanel() {
@@ -2513,128 +2471,119 @@ function closeFbPanel() {
   currentFbSection = null;
 }
 
-// ─── User selection ───
-function selectFbUser(el, name) {
+// ─── User selection → load history from Supabase ───
+async function selectFbUser(el, name) {
   document.querySelectorAll('.fb-user-pill').forEach(p => p.classList.remove('selected'));
   el.classList.add('selected');
   selectedFbUser = name;
-  if (currentFbSection) {
-    loadCurrentUserFields(currentFbSection);
-    renderColegas(currentFbSection);
-  }
-  updateFbProgress();
+
+  // Reset form
+  document.getElementById('fbEmptyState').style.display    = 'block';
+  document.getElementById('fbAnnotationForm').style.display = 'none';
+  document.getElementById('fbPanelFooter').style.display   = 'none';
+  currentFbSection = null;
+
+  await loadFbHistory();
 }
 
-// ─── Auto-save ───
-function autoSaveFb() {
-  clearTimeout(fbAutoSaveTimer);
-  fbAutoSaveTimer = setTimeout(() => saveFbSection(true), 900);
-}
+// ─── Load history from Supabase ───
+async function loadFbHistory() {
+  if (!selectedFbUser) return;
 
-// ─── Save annotation to localStorage ───
-function saveFbSection(auto = false) {
-  if (!currentFbSection) return;
-  if (!selectedFbUser) { if (!auto) showToast('Selecione seu nome antes de salvar', 'warning'); return; }
-  const data = fbLoad();
-  if (!data[currentFbSection]) data[currentFbSection] = {};
-  data[currentFbSection][selectedFbUser] = {
-    url_fonte:         document.getElementById('fbUrl').value.trim(),
-    o_que_melhoraria:  document.getElementById('fbMelhoria').value.trim(),
-    observacoes:       document.getElementById('fbObs').value.trim()
-  };
-  fbSave(data);
+  const { data, error } = await fbSupabase
+    .from('feedback_responses')
+    .select('section_id, section_name, url_fonte, o_que_melhoraria, observacoes, submitted_at')
+    .eq('user_name', selectedFbUser)
+    .order('submitted_at', { ascending: false });
+
+  fbHistory = error ? [] : (data || []);
+  renderFbHistory();
   refreshFbDots();
-  updateFbProgress();
-  renderColegas(currentFbSection);
-  const badge = document.getElementById('fbSavedBadge');
-  badge.classList.add('show');
-  clearTimeout(badge._t);
-  badge._t = setTimeout(() => badge.classList.remove('show'), 2000);
-  if (!auto) showToast('Anotacao salva!', 'success');
+  updateFbProgressBadge();
 }
 
-// ─── Progress ───
-function updateFbProgress() {
-  const data  = fbLoad();
-  const total = Object.keys(FB_SECTIONS).length;
-  const done  = Object.keys(FB_SECTIONS).filter(sid => {
-    const sec = data[sid];
-    return sec && Object.values(sec).some(u => u.url_fonte || u.o_que_melhoraria || u.observacoes);
-  }).length;
-  const pct = Math.round((done / total) * 100);
-  document.getElementById('fbProgressText').textContent = done + ' / ' + total;
-  document.getElementById('fbProgressFill').style.width = pct + '%';
-  document.getElementById('fbCountNumber').textContent  = done;
-  document.getElementById('fbDrawerCount').textContent  = done;
+// ─── Render history cards ───
+function renderFbHistory() {
+  const area  = document.getElementById('fbHistoryList');
+  const wrap  = document.getElementById('fbHistory');
+  const count = document.getElementById('fbHistoryCount');
+
+  if (fbHistory.length === 0) { wrap.style.display = 'none'; return; }
+
+  wrap.style.display = 'block';
+  count.textContent  = fbHistory.length;
+
+  area.innerHTML = fbHistory.map(r => {
+    const color   = FB_COLORS[r.section_id] || '#00B4A0';
+    const snippet = r.o_que_melhoraria || r.observacoes || '';
+    return `<div class="fb-hist-card" onclick="jumpToSection('${r.section_id}')">
+      <div class="fb-hist-bar" style="background:${color};"></div>
+      <div class="fb-hist-content">
+        <div class="fb-hist-name">${r.section_name || r.section_id}</div>
+        ${r.url_fonte  ? `<div class="fb-hist-url">${r.url_fonte}</div>` : ''}
+        ${snippet      ? `<div class="fb-hist-snippet">${snippet}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
 }
 
-// ─── Drawer ───
-function openFbDrawer() {
-  fbDrawerOpen = true;
-  document.getElementById('fbDrawer').classList.add('open');
+function jumpToSection(sectionId) {
+  // Navigate sidebar to that section
+  const navEl = [...document.querySelectorAll('.nav-subitem, .nav-item')].find(el => {
+    return (el.getAttribute('onclick') || '').includes(`'${sectionId}'`);
+  });
+  if (navEl) {
+    // Open parent subnav if needed
+    const subnav = navEl.closest('.nav-subitems');
+    if (subnav && !subnav.classList.contains('open')) {
+      subnav.classList.add('open');
+      const parentArrow = subnav.previousElementSibling?.querySelector('.expand-arrow');
+      if (parentArrow) parentArrow.classList.add('open');
+    }
+    showSection(sectionId, navEl);
+  }
 }
-function closeFbDrawer() {
-  fbDrawerOpen = false;
-  document.getElementById('fbDrawer').classList.remove('open');
+
+function updateFbProgressBadge() {
+  const el = document.getElementById('fbPanelProgress');
+  const n  = fbHistory.length;
+  el.textContent = n === 0 ? '0 anotacoes' : n + (n === 1 ? ' anotacao' : ' anotacoes');
 }
-function toggleFbDrawer() {
-  if (fbDrawerOpen) closeFbDrawer(); else openFbDrawer();
-}
 
-// ─── Export & send to Supabase ───
-async function exportFeedback() {
-  if (!selectedFbUser) { showToast('Selecione seu nome antes de enviar', 'warning'); return; }
-  const data   = fbLoad();
-  const global = fbLoadGlobal();
-  const globalObs = document.getElementById('fbGlobalObs').value.trim();
-  const sections = Object.entries(data)
-    .filter(([sid, users]) => users[selectedFbUser] && (users[selectedFbUser].url_fonte || users[selectedFbUser].o_que_melhoraria || users[selectedFbUser].observacoes))
-    .map(([sid, users]) => ({ section_id: sid, section_name: FB_SECTIONS[sid] || sid, ...users[selectedFbUser] }));
-  if (sections.length === 0) { showToast('Voce ainda nao fez nenhuma anotacao', 'warning'); return; }
+// ─── Save to Supabase ───
+async function saveFbSection() {
+  if (!currentFbSection) return;
+  if (!selectedFbUser) { showToast('Selecione seu nome antes de salvar', 'warning'); return; }
 
-  // Save global obs locally
-  const g = fbLoadGlobal(); g[selectedFbUser] = globalObs; fbSaveGlobal(g);
+  const btn = document.getElementById('fbBtnSave');
+  btn.disabled = true;
+  btn.querySelector('svg').style.opacity = '.4';
 
-  // Build rows for Supabase (one row per section)
-  const rows = sections.map(s => ({
-    user_name:            selectedFbUser,
-    section_id:           s.section_id,
-    section_name:         s.section_name,
-    url_fonte:            s.url_fonte || null,
-    o_que_melhoraria:     s.o_que_melhoraria || null,
-    observacoes:          s.observacoes || null,
-    general_observations: globalObs || null
-  }));
-
-  showToast('Enviando para o banco...', 'warning');
+  const row = {
+    user_name:        selectedFbUser,
+    section_id:       currentFbSection,
+    section_name:     FB_SECTIONS[currentFbSection] || currentFbSection,
+    url_fonte:        document.getElementById('fbUrl').value.trim()      || null,
+    o_que_melhoraria: document.getElementById('fbMelhoria').value.trim() || null,
+    observacoes:      document.getElementById('fbObs').value.trim()      || null
+  };
 
   const { error } = await fbSupabase
     .from('feedback_responses')
-    .upsert(rows, { onConflict: 'user_name,section_id' });
+    .upsert(row, { onConflict: 'user_name,section_id' });
 
-  if (error) {
-    console.error(error);
-    showToast('Erro ao enviar: ' + error.message, 'error');
-    return;
-  }
+  btn.disabled = false;
+  btn.querySelector('svg').style.opacity = '1';
 
-  showToast('Feedback de ' + selectedFbUser + ' salvo no Supabase!', 'success');
+  if (error) { showToast('Erro: ' + error.message, 'error'); return; }
+
+  const badge = document.getElementById('fbSentBadge');
+  badge.classList.add('show');
+  clearTimeout(badge._t);
+  badge._t = setTimeout(() => badge.classList.remove('show'), 2500);
+
+  await loadFbHistory(); // refresh history
 }
-
-// ─── Clear ───
-function clearAllFeedback() {
-  if (!confirm('Limpar TODAS as anotacoes de todos os usuarios?')) return;
-  localStorage.removeItem(FB_STORAGE_KEY);
-  localStorage.removeItem(FB_GLOBAL_KEY);
-  refreshFbDots();
-  updateFbProgress();
-  if (currentFbSection) { loadCurrentUserFields(currentFbSection); renderColegas(currentFbSection); }
-  document.getElementById('fbGlobalObs').value = '';
-  showToast('Todas as anotacoes foram removidas', 'warning');
-}
-
-// ─── Init: load progress on page load ───
-document.addEventListener('DOMContentLoaded', () => { updateFbProgress(); });
 
 function switchAgendaTab(el) {
   const sector = el.getAttribute('data-sector');
