@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 /* ═══════════ DESIGN TOKENS ═══════════ */
 :root {
@@ -749,8 +750,8 @@ body.feedback-mode .nav-subitem .dot{display:none;}
         <div class="fb-count-label">secoes anotadas</div>
       </div>
       <button class="btn btn-teal" style="width:100%;justify-content:center;" onclick="exportFeedback()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Exportar JSON
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        Enviar ao Supabase
       </button>
       <button class="btn btn-outline" style="width:100%;justify-content:center;" onclick="clearAllFeedback()">Limpar tudo</button>
     </div>
@@ -2343,6 +2344,11 @@ const FB_USERS = ['Pedro','Gustavo','Bernardo','Luana','Bruno'];
 const FB_STORAGE_KEY = 'cbie_feedback_v1';
 const FB_GLOBAL_KEY  = 'cbie_feedback_global_v1';
 
+const fbSupabase = supabase.createClient(
+  'https://yplueverljifybptpmzt.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwbHVldmVybGppZnlicHRwbXp0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYzMTY4OTcsImV4cCI6MjA5MTg5Mjg5N30.AdghpNAXM8I21KirP3Ra0crDSkkltUh11WHRl0p2WQQ'
+);
+
 let feedbackMode    = false;
 let currentFbSection = null;
 let selectedFbUser  = null;
@@ -2523,29 +2529,44 @@ function toggleFbDrawer() {
   if (fbDrawerOpen) closeFbDrawer(); else openFbDrawer();
 }
 
-// ─── Export ───
-function exportFeedback() {
-  if (!selectedFbUser) { showToast('Selecione seu nome antes de exportar', 'warning'); return; }
-  const data    = fbLoad();
-  const global  = fbLoadGlobal();
+// ─── Export & send to Supabase ───
+async function exportFeedback() {
+  if (!selectedFbUser) { showToast('Selecione seu nome antes de enviar', 'warning'); return; }
+  const data   = fbLoad();
+  const global = fbLoadGlobal();
+  const globalObs = document.getElementById('fbGlobalObs').value.trim();
   const sections = Object.entries(data)
     .filter(([sid, users]) => users[selectedFbUser] && (users[selectedFbUser].url_fonte || users[selectedFbUser].o_que_melhoraria || users[selectedFbUser].observacoes))
     .map(([sid, users]) => ({ section_id: sid, section_name: FB_SECTIONS[sid] || sid, ...users[selectedFbUser] }));
   if (sections.length === 0) { showToast('Voce ainda nao fez nenhuma anotacao', 'warning'); return; }
-  const payload = {
-    user_name: selectedFbUser,
-    submitted_at: new Date().toISOString(),
-    general_observations: global[selectedFbUser] || document.getElementById('fbGlobalObs').value.trim(),
-    sections
-  };
-  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href = url; a.download = 'feedback_' + selectedFbUser + '_' + new Date().toISOString().split('T')[0] + '.json';
-  a.click(); URL.revokeObjectURL(url);
-  // Save global obs
-  const g = fbLoadGlobal(); g[selectedFbUser] = document.getElementById('fbGlobalObs').value.trim(); fbSaveGlobal(g);
-  showToast('Feedback de ' + selectedFbUser + ' exportado!', 'success');
+
+  // Save global obs locally
+  const g = fbLoadGlobal(); g[selectedFbUser] = globalObs; fbSaveGlobal(g);
+
+  // Build rows for Supabase (one row per section)
+  const rows = sections.map(s => ({
+    user_name:            selectedFbUser,
+    section_id:           s.section_id,
+    section_name:         s.section_name,
+    url_fonte:            s.url_fonte || null,
+    o_que_melhoraria:     s.o_que_melhoraria || null,
+    observacoes:          s.observacoes || null,
+    general_observations: globalObs || null
+  }));
+
+  showToast('Enviando para o banco...', 'warning');
+
+  const { error } = await fbSupabase
+    .from('feedback_responses')
+    .upsert(rows, { onConflict: 'user_name,section_id' });
+
+  if (error) {
+    console.error(error);
+    showToast('Erro ao enviar: ' + error.message, 'error');
+    return;
+  }
+
+  showToast('Feedback de ' + selectedFbUser + ' salvo no Supabase!', 'success');
 }
 
 // ─── Clear ───
