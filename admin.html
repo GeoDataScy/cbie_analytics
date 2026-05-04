@@ -406,6 +406,43 @@ body.feedback-mode .nav-subitem .dot{display:none;}
 .fb-detail-footer{padding:14px 18px;border-top:1px solid var(--gray-100);flex-shrink:0;}
 .fb-detail-edit-btn{width:100%;padding:9px;border-radius:8px;background:var(--navy-900);color:var(--white);font-size:13px;font-weight:600;font-family:var(--font-body);border:none;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:7px;}
 .fb-detail-edit-btn:hover{background:var(--navy-700);}
+
+/* ─── FEEDBACK REPORT ─── */
+.fbr-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
+.fbr-title{font-size:20px;font-weight:700;color:var(--navy-900);}
+.fbr-subtitle{font-size:13px;color:var(--gray-400);margin-top:2px;}
+.fbr-export-btn{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;background:var(--navy-900);color:var(--white);border:none;border-radius:9px;font-size:13px;font-weight:600;font-family:var(--font-body);cursor:pointer;transition:all .2s;}
+.fbr-export-btn:hover{background:var(--navy-700);}
+.fbr-export-btn:disabled{opacity:.5;cursor:not-allowed;}
+.fbr-loading{text-align:center;padding:60px 20px;color:var(--gray-300);font-size:14px;}
+.fbr-user-block{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);margin-bottom:20px;overflow:hidden;}
+.fbr-user-header{display:flex;align-items:center;gap:12px;padding:16px 20px;background:var(--navy-900);cursor:pointer;user-select:none;}
+.fbr-user-avatar{width:34px;height:34px;border-radius:50%;background:var(--teal-500);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--white);flex-shrink:0;}
+.fbr-user-name{font-size:15px;font-weight:600;color:var(--white);}
+.fbr-user-count{margin-left:auto;font-size:12px;background:rgba(255,255,255,.15);color:var(--white);padding:3px 10px;border-radius:20px;font-weight:600;}
+.fbr-user-chevron{color:rgba(255,255,255,.6);transition:transform .25s;flex-shrink:0;}
+.fbr-user-chevron.open{transform:rotate(180deg);}
+.fbr-sections{display:none;}
+.fbr-sections.open{display:block;}
+.fbr-section-row{display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:0;border-top:1px solid var(--gray-100);}
+.fbr-section-row:first-child{border-top:none;}
+.fbr-section-row:hover{background:var(--gray-50);}
+.fbr-section-label{padding:12px 20px;font-size:12px;font-weight:600;color:var(--gray-500);display:flex;align-items:center;gap:8px;border-right:1px solid var(--gray-100);}
+.fbr-section-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.fbr-section-empty{padding:12px 16px;font-size:12px;color:var(--gray-200);font-style:italic;display:flex;align-items:center;}
+.fbr-field{padding:12px 16px;font-size:12px;color:var(--navy-900);border-right:1px solid var(--gray-100);display:flex;flex-direction:column;gap:4px;}
+.fbr-field-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray-300);}
+.fbr-field-value{line-height:1.5;color:var(--gray-600);}
+.fbr-field-url{color:var(--teal-500);text-decoration:none;word-break:break-all;}
+.fbr-field-url:hover{text-decoration:underline;}
+.fbr-img-thumb{width:56px;height:42px;object-fit:cover;border-radius:6px;cursor:pointer;margin-top:4px;border:1px solid var(--gray-100);}
+.fbr-col-headers{display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:0;background:var(--gray-50);border-top:1px solid var(--gray-100);}
+.fbr-col-h{padding:8px 16px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);}
+.fbr-col-h:first-child{border-right:1px solid var(--gray-100);}
+.fbr-group-label{padding:10px 20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-300);background:var(--gray-50);border-top:1px solid var(--gray-100);}
+.fbr-empty-user{padding:20px;text-align:center;font-size:13px;color:var(--gray-300);font-style:italic;}
+.fbr-reload-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;background:transparent;border:1.5px solid var(--gray-200);color:var(--gray-500);border-radius:8px;font-size:12px;font-weight:600;font-family:var(--font-body);cursor:pointer;transition:all .2s;}
+.fbr-reload-btn:hover{border-color:var(--teal-400);color:var(--teal-500);}
 </style>
 </head>
 <body>
@@ -568,6 +605,10 @@ body.feedback-mode .nav-subitem .dot{display:none;}
       </div>
 
       <div class="nav-section-label">Sistema</div>
+      <div class="nav-item" onclick="showSection('fb-report',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        Relatorio de Feedbacks
+      </div>
       <div class="nav-item" onclick="showSection('sys-imports',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Importacoes
@@ -699,6 +740,7 @@ body.feedback-mode .nav-subitem .dot{display:none;}
       <div class="section-page" id="sec-leg-projetos"></div>
       <div class="section-page" id="sec-leg-dou"></div>
       <div class="section-page" id="sec-leg-agenda"></div>
+      <div class="section-page" id="sec-fb-report"></div>
       <div class="section-page" id="sec-sys-imports"></div>
       <div class="section-page" id="sec-sys-config"></div>
 
@@ -1204,6 +1246,10 @@ function showSection(sectionId, el) {
     document.getElementById('topbarTitle').textContent = 'Configuracoes';
     document.getElementById('topbarSub').textContent = 'Configuracoes do sistema';
     renderConfigSection();
+  } else if (sectionId === 'fb-report') {
+    document.getElementById('topbarTitle').textContent = 'Relatorio de Feedbacks';
+    document.getElementById('topbarSub').textContent = 'Todos os usuarios e seus feedbacks por secao';
+    loadFbReport();
   }
   if (typeof feedbackMode !== 'undefined' && feedbackMode && typeof FB_SECTIONS !== 'undefined' && FB_SECTIONS[sectionId]) {
     openAnnotation(sectionId);
@@ -2760,6 +2806,173 @@ async function saveFbSection() {
 
   await loadFbHistory();
 }
+
+// ─── FEEDBACK REPORT ───
+const FB_USERS = ['Pedro','Matheus','Bernardo','Luana','Bruno'];
+
+const FB_GROUPS = [
+  { label: 'Dashboard', ids: ['dashboard-overview'] },
+  { label: 'Setor Eletrico', ids: ['se-carga','se-demanda','se-reservatorios','se-reserva','se-geracao','se-pld'] },
+  { label: 'Petroleo e Gas', ids: ['pg-global','pg-brasil','pg-consumo','pg-precos','pg-gas'] },
+  { label: 'Biocombustiveis', ids: ['bc-biodiesel','bc-acucar','bc-precos'] },
+  { label: 'Legislativo', ids: ['leg-projetos','leg-dou','leg-agenda'] },
+];
+
+let fbrAllData = null;
+
+async function loadFbReport() {
+  const container = document.getElementById('sec-fb-report');
+  container.innerHTML = `
+    <div class="fbr-header">
+      <div>
+        <div class="fbr-title">Relatorio de Feedbacks</div>
+        <div class="fbr-subtitle">Todos os usuarios — todos os setores</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="fbr-reload-btn" onclick="reloadFbReport()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+          Atualizar
+        </button>
+        <button class="fbr-export-btn" id="fbrExportBtn" onclick="exportFbReport()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Exportar Excel
+        </button>
+      </div>
+    </div>
+    <div id="fbrBody"><div class="fbr-loading">Carregando feedbacks...</div></div>`;
+
+  const { data, error } = await fbSupabase
+    .from('feedback_responses')
+    .select('user_name, section_id, section_name, url_fonte, o_que_melhoraria, observacoes, image_url, submitted_at')
+    .order('submitted_at', { ascending: false });
+
+  if (error) {
+    document.getElementById('fbrBody').innerHTML = `<div class="fbr-loading" style="color:var(--red-400);">Erro ao carregar: ${error.message}</div>`;
+    return;
+  }
+
+  fbrAllData = data || [];
+  renderFbReport();
+}
+
+function reloadFbReport() {
+  fbrAllData = null;
+  loadFbReport();
+}
+
+function renderFbReport() {
+  const body = document.getElementById('fbrBody');
+  if (!body) return;
+
+  // index by user → section_id
+  const byUser = {};
+  FB_USERS.forEach(u => { byUser[u] = {}; });
+  (fbrAllData || []).forEach(r => {
+    if (!byUser[r.user_name]) byUser[r.user_name] = {};
+    byUser[r.user_name][r.section_id] = r;
+  });
+
+  body.innerHTML = FB_USERS.map(user => {
+    const userRecords = byUser[user] || {};
+    const count = Object.keys(userRecords).length;
+    const initials = user.slice(0,2).toUpperCase();
+
+    const sectionsHtml = FB_GROUPS.map(group => {
+      const groupRows = group.ids.map(sid => {
+        const r = userRecords[sid];
+        const color = FB_COLORS[sid] || '#00B4A0';
+        const sectionName = FB_SECTIONS[sid] || sid;
+
+        if (!r) {
+          return `<div class="fbr-section-row">
+            <div class="fbr-section-label">
+              <span class="fbr-section-dot" style="background:${color};"></span>${sectionName}
+            </div>
+            <div class="fbr-section-empty" style="grid-column:2/5;">Sem anotacao</div>
+          </div>`;
+        }
+
+        const imgHtml = r.image_url
+          ? `<img class="fbr-img-thumb" src="${r.image_url}" alt="img" onclick="window.open('${r.image_url}','_blank')" title="Abrir imagem">`
+          : '';
+
+        return `<div class="fbr-section-row">
+          <div class="fbr-section-label">
+            <span class="fbr-section-dot" style="background:${color};"></span>${sectionName}
+          </div>
+          <div class="fbr-field">
+            ${r.url_fonte ? `<div class="fbr-field-label">Fonte</div><a class="fbr-field-url" href="${r.url_fonte}" target="_blank">${r.url_fonte}</a>` : '<div class="fbr-field-label" style="color:var(--gray-200);">Fonte</div><span style="color:var(--gray-200);font-size:12px;">—</span>'}
+          </div>
+          <div class="fbr-field">
+            ${r.o_que_melhoraria ? `<div class="fbr-field-label">O que melhoraria</div><div class="fbr-field-value">${r.o_que_melhoraria}</div>` : '<div class="fbr-field-label" style="color:var(--gray-200);">O que melhoraria</div><span style="color:var(--gray-200);font-size:12px;">—</span>'}
+          </div>
+          <div class="fbr-field">
+            ${r.observacoes ? `<div class="fbr-field-label">Observacoes</div><div class="fbr-field-value">${r.observacoes}</div>` : '<div class="fbr-field-label" style="color:var(--gray-200);">Observacoes</div><span style="color:var(--gray-200);font-size:12px;">—</span>'}
+            ${imgHtml}
+          </div>
+        </div>`;
+      }).join('');
+
+      return `<div class="fbr-group-label">${group.label}</div>${groupRows}`;
+    }).join('');
+
+    return `<div class="fbr-user-block">
+      <div class="fbr-user-header" onclick="toggleFbrUser(this)">
+        <div class="fbr-user-avatar">${initials}</div>
+        <div class="fbr-user-name">${user}</div>
+        <div class="fbr-user-count">${count} de ${Object.keys(FB_SECTIONS).length} secoes</div>
+        <svg class="fbr-user-chevron open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="fbr-col-headers">
+        <div class="fbr-col-h" style="border-right:1px solid var(--gray-100);">Secao</div>
+        <div class="fbr-col-h">Fonte dos Dados</div>
+        <div class="fbr-col-h">O que Melhoraria</div>
+        <div class="fbr-col-h">Observacoes</div>
+      </div>
+      <div class="fbr-sections open">${count === 0 ? '<div class="fbr-empty-user">Nenhum feedback registrado ainda.</div>' : sectionsHtml}</div>
+    </div>`;
+  }).join('');
+}
+
+function toggleFbrUser(headerEl) {
+  const sections = headerEl.nextElementSibling.nextElementSibling;
+  const chevron  = headerEl.querySelector('.fbr-user-chevron');
+  const isOpen   = sections.classList.contains('open');
+  sections.classList.toggle('open', !isOpen);
+  chevron.classList.toggle('open', !isOpen);
+}
+
+function exportFbReport() {
+  if (!fbrAllData) return;
+  const btn = document.getElementById('fbrExportBtn');
+  btn.disabled = true;
+
+  const rows = [];
+  FB_USERS.forEach(user => {
+    Object.keys(FB_SECTIONS).forEach(sid => {
+      const r = (fbrAllData || []).find(x => x.user_name === user && x.section_id === sid);
+      rows.push({
+        'Usuario':          user,
+        'Setor / Secao':    FB_SECTIONS[sid] || sid,
+        'Fonte dos Dados':  r?.url_fonte        || '',
+        'O que melhoraria': r?.o_que_melhoraria || '',
+        'Observacoes':      r?.observacoes       || '',
+        'Imagem':           r?.image_url         || '',
+        'Enviado em':       r?.submitted_at ? new Date(r.submitted_at).toLocaleString('pt-BR') : '',
+      });
+    });
+  });
+
+  const ws = XLSX.utils.json_to_sheet(rows);
+  ws['!cols'] = [14,28,32,36,36,40,18].map(w => ({ wch: w }));
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Feedbacks');
+  XLSX.writeFile(wb, `feedbacks_cbie_${new Date().toISOString().slice(0,10)}.xlsx`);
+  btn.disabled = false;
+}
+
+// auto-load when section is shown (hook into showSection)
+const _origShowSection = typeof showSection === 'function' ? showSection : null;
 
 function switchAgendaTab(el) {
   const sector = el.getAttribute('data-sector');
