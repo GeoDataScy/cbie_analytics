@@ -443,6 +443,27 @@ body.feedback-mode .nav-subitem .dot{display:none;}
 .fbr-empty-user{padding:20px;text-align:center;font-size:13px;color:var(--gray-300);font-style:italic;}
 .fbr-reload-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;background:transparent;border:1.5px solid var(--gray-200);color:var(--gray-500);border-radius:8px;font-size:12px;font-weight:600;font-family:var(--font-body);cursor:pointer;transition:all .2s;}
 .fbr-reload-btn:hover{border-color:var(--teal-400);color:var(--teal-500);}
+
+/* ─── LEG SETOR ─── */
+.leg-agenda-pinned{padding:28px 32px;display:flex;flex-direction:column;gap:20px;}
+.leg-agenda-pinned .lap-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.leg-agenda-pinned .lap-title{font-family:var(--font-display);font-size:22px;color:var(--white);line-height:1.2;}
+.leg-agenda-pinned .lap-week{font-size:12px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-top:4px;}
+.leg-agenda-pinned .lap-stats{display:flex;gap:24px;flex-wrap:wrap;}
+.leg-agenda-pinned .lap-stat{text-align:center;padding:10px 18px;background:rgba(255,255,255,.07);border-radius:10px;min-width:80px;}
+.leg-agenda-pinned .lap-stat-val{font-family:var(--font-display);font-size:24px;color:var(--white);}
+.leg-agenda-pinned .lap-stat-lbl{font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1px;margin-top:3px;}
+.leg-agenda-pinned .lap-highlights{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;}
+.leg-agenda-pinned .lap-hl-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.4);margin-bottom:10px;}
+.leg-agenda-pinned .lap-hl-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.leg-agenda-pinned .lap-hl-item:last-child{border-bottom:none;}
+.leg-agenda-pinned .lap-hl-badge{font-size:9px;font-weight:700;padding:3px 7px;border-radius:4px;background:#F87171;color:var(--white);flex-shrink:0;text-transform:uppercase;letter-spacing:.5px;margin-top:1px;}
+.leg-agenda-pinned .lap-hl-text{font-size:13px;color:rgba(255,255,255,.8);line-height:1.5;}
+.leg-agenda-pinned .lap-hl-sub{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px;}
+.leg-prop-row{transition:background .15s;}
+.leg-prop-row:hover{background:var(--gray-50);}
+.leg-setor-search{width:100%;padding:9px 14px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:13px;font-family:var(--font-body);color:var(--navy-900);background:var(--white);outline:none;transition:border-color .2s;}
+.leg-setor-search:focus{border-color:var(--teal-500);box-shadow:0 0 0 3px rgba(0,180,160,.1);}
 </style>
 </head>
 <body>
@@ -576,6 +597,7 @@ body.feedback-mode .nav-subitem .dot{display:none;}
         <div class="nav-subitem" onclick="showSection('pg-consumo',this)"><span class="dot dot-blue"></span>Consumo e Refino</div>
         <div class="nav-subitem" onclick="showSection('pg-precos',this)"><span class="dot dot-blue"></span>Precos e Vendas</div>
         <div class="nav-subitem" onclick="showSection('pg-gas',this)"><span class="dot dot-blue"></span>Gas Natural</div>
+        <div class="nav-subitem" onclick="showSection('pg-opr',this)"><span class="dot dot-blue"></span>OPR &mdash; Outlook de Precos</div>
       </div>
 
       <div class="nav-section-label">Biocombustiveis</div>
@@ -599,9 +621,9 @@ body.feedback-mode .nav-subitem .dot{display:none;}
         <svg class="expand-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M9 18l6-6-6-6"/></svg>
       </div>
       <div class="nav-subitems" id="leg-sub">
-        <div class="nav-subitem" onclick="showSection('leg-projetos',this)"><span class="dot" style="background:var(--red-400);"></span>Projetos de Lei</div>
-        <div class="nav-subitem" onclick="showSection('leg-dou',this)"><span class="dot" style="background:var(--red-400);"></span>Publicacoes DOU</div>
-        <div class="nav-subitem" onclick="showSection('leg-agenda',this)"><span class="dot" style="background:var(--red-400);"></span>Agenda Semanal</div>
+        <div class="nav-subitem" onclick="showSection('leg-pg',this)"><span class="dot" style="background:var(--blue-400, #60A5FA);"></span>Petroleo e Gas</div>
+        <div class="nav-subitem" onclick="showSection('leg-se',this)"><span class="dot" style="background:var(--amber-400);"></span>Setor Eletrico</div>
+        <div class="nav-subitem" onclick="showSection('leg-bc',this)"><span class="dot" style="background:var(--green-400);"></span>Biocombustiveis / EnR</div>
       </div>
 
       <div class="nav-section-label">Sistema</div>
@@ -734,12 +756,16 @@ body.feedback-mode .nav-subitem .dot{display:none;}
       <div class="section-page" id="sec-pg-consumo"></div>
       <div class="section-page" id="sec-pg-precos"></div>
       <div class="section-page" id="sec-pg-gas"></div>
+      <div class="section-page" id="sec-pg-opr"></div>
       <div class="section-page" id="sec-bc-biodiesel"></div>
       <div class="section-page" id="sec-bc-acucar"></div>
       <div class="section-page" id="sec-bc-precos"></div>
       <div class="section-page" id="sec-leg-projetos"></div>
       <div class="section-page" id="sec-leg-dou"></div>
       <div class="section-page" id="sec-leg-agenda"></div>
+      <div class="section-page" id="sec-leg-pg"></div>
+      <div class="section-page" id="sec-leg-se"></div>
+      <div class="section-page" id="sec-leg-bc"></div>
       <div class="section-page" id="sec-fb-report"></div>
       <div class="section-page" id="sec-sys-imports"></div>
       <div class="section-page" id="sec-sys-config"></div>
@@ -910,11 +936,11 @@ const DATA = {
     estimativa: [82650,85342,87852,90448,93135,95917,98796,101779,104868]
   },
   demanda: {
-    years: [2020,2021,2022,2023,2024],
-    residencial: [148173,151253,152956,164323,176425],
-    industrial: [166333,182108,182881,188268,197565],
-    comercial: [82524,87788,92494,97716,103002],
-    outros: [78611,81016,80245,80705,83227]
+    years:       [2018,   2019,   2020,   2021,   2022,   2023,   2024],
+    residencial: [137500, 140200, 148173, 151253, 152956, 164323, 176425],
+    industrial:  [161200, 165000, 166333, 182108, 182881, 188268, 197565],
+    comercial:   [ 79800,  81200,  82524,  87788,  92494,  97716, 103002],
+    outros:      [ 75600,  78000,  78611,  81016,  80245,  80705,  83227]
   },
   reservatorios: {
     months: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
@@ -943,9 +969,14 @@ const DATA = {
     superior: [110,102,96,92,100,118,150,180,190,175,140,115]
   },
   pgGlobal: {
-    years: [2018,2019,2020,2021,2022,2023,2024],
-    production: [99.8,100.6,94.2,96.5,99.4,101.8,102.5],
-    brent: [71.3,64.2,41.8,70.7,99.0,82.6,78.5]
+    years:      [2018, 2019, 2020, 2021, 2022,  2023,  2024],
+    production: [99.8,100.6, 94.2, 96.5, 99.4, 101.8, 102.5],
+    demanda:    [99.2,100.1, 91.0, 96.2, 99.7, 101.7, 103.0],
+    brent:      [71.3, 64.2, 41.8, 70.7, 99.0,  82.6,  78.5],
+    yearsProj:      [2025,  2026,  2027,  2028,  2029],
+    productionProj: [103.8, 104.5, 105.2, 105.8, 106.3],
+    demandaProj:    [103.8, 104.6, 105.3, 106.0, 106.5],
+    brentProj:      [ 74.0,  71.0,  68.0,  65.0,  63.0]
   },
   pgBrasil: {
     years: [2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034],
@@ -953,17 +984,32 @@ const DATA = {
     pde: [3358,4200,4700,4748,5411,5689,5856,5855,5779,5579,5343]
   },
   pgConsumo: {
-    years: [2018,2019,2020,2021,2022,2023,2024],
-    demanda: [2420,2372,2148,2290,2402,2448,2500],
-    capacidade: [2290,2300,2300,2310,2320,2330,2350],
-    capImports: [2580,2590,2570,2580,2600,2610,2630]
+    years:      [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+    demanda:    [2420, 2372, 2148, 2290, 2402, 2448, 2500],
+    capacidade: [2290, 2300, 2300, 2310, 2320, 2330, 2350],
+    capImports: [2580, 2590, 2570, 2580, 2600, 2610, 2630],
+    yearsProj:       [2025, 2026, 2027, 2028, 2029],
+    demandaProj:     [2525, 2550, 2572, 2592, 2610],
+    capacidadeProj:  [2360, 2370, 2382, 2392, 2402],
+    capImportsProj:  [2645, 2658, 2670, 2682, 2695]
   },
   pgPrecos: {
-    years: [2020,2021,2022,2023,2024],
-    gasolina: [4.52,5.49,6.59,5.64,5.89],
-    diesel: [3.85,4.68,6.37,5.53,5.78],
-    etanol: [3.15,4.05,4.25,3.52,3.65],
-    cicloOtto: [4.10,5.05,5.85,4.95,5.15]
+    years:    [2020, 2021, 2022, 2023, 2024],
+    gasolina: [4.52, 5.49, 6.59, 5.64, 5.89],
+    diesel:   [3.85, 4.68, 6.37, 5.53, 5.78],
+    etanol:   [3.15, 4.05, 4.25, 3.52, 3.65],
+    yearsProj:    [2025, 2026, 2027, 2028, 2029],
+    gasolinaProj: [5.65, 5.45, 5.30, 5.20, 5.10],
+    dieselProj:   [5.55, 5.35, 5.20, 5.10, 4.95],
+    etanolProj:   [3.55, 3.45, 3.38, 3.30, 3.25],
+    vendasYears:        [2020,  2021,  2022,  2023,  2024],
+    vendasGasolina:     [39800, 42600, 45200, 47800, 49500],
+    vendasDiesel:       [62500, 66800, 68900, 71200, 73800],
+    vendasEtanol:       [18400, 20100, 21800, 23500, 25200],
+    vendasYearsProj:    [2025,  2026,  2027,  2028,  2029],
+    vendasGasolinaProj: [50800, 51900, 52800, 53500, 54000],
+    vendasDieselProj:   [75200, 76500, 77600, 78500, 79200],
+    vendasEtanolProj:   [26800, 28200, 29500, 30800, 32000]
   },
   pgGas: {
     years: [2019,2020,2021,2022,2023,2024],
@@ -978,9 +1024,15 @@ const DATA = {
     utilizacao: [62,66,70,72,75,78,82]
   },
   bcAcucar: {
-    years: [2018,2019,2020,2021,2022,2023,2024],
-    moagem: [572,590,605,580,570,610,640],
-    mixAcucar: [35,36,34,46,48,45,42]
+    years:    [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+    moagem:   [ 572,  590,  605,  580,  570,  610,  640],
+    mixAcucar:[  35,   36,   34,   46,   48,   45,   42],
+    precoYears:   [2018, 2019, 2020, 2021, 2022,  2023,  2024],
+    precoBrasil:  [  68,   72,   82,   98,  110,   145,   132],
+    precoNY11:    [11.8, 12.6, 13.1, 17.0, 18.1,  24.5,  22.0],
+    precoYearsProj: [2025,  2026,  2027,  2028,  2029],
+    precoBrasilProj:[138,   128,   122,   118,   115],
+    precoNY11Proj:  [20.0,  18.5,  17.5,  17.0,  16.5]
   },
   bcPrecos: {
     years: [2025,2026,2027,2028,2029,2030,2031,2032,2033,2034],
@@ -1004,11 +1056,13 @@ const SECTIONS = {
   },
   'se-demanda': {
     title: 'Demanda de Energia',
-    subtitle: 'Demanda por classe de consumo (GWh)',
+    subtitle: 'Demanda por classe de consumo (TWh)',
     sector: 'eletrico',
-    fields: [{name:'ano',label:'Ano',type:'number',placeholder:'2024'},{name:'residencial',label:'Residencial',type:'number',placeholder:'176425'},{name:'industrial',label:'Industrial',type:'number',placeholder:'197565'},{name:'comercial',label:'Comercial',type:'number',placeholder:'103002'},{name:'outros',label:'Outros',type:'number',placeholder:'83227'}],
+    fields: [{name:'ano',label:'Ano',type:'number',placeholder:'2024'},{name:'residencial',label:'Residencial (GWh)',type:'number',placeholder:'176425'},{name:'industrial',label:'Industrial (GWh)',type:'number',placeholder:'197565'},{name:'comercial',label:'Comercial (GWh)',type:'number',placeholder:'103002'},{name:'outros',label:'Outros (GWh)',type:'number',placeholder:'83227'}],
     sources: ['EPE','CCEE'],
     chartFn: renderDemandaChart,
+    chartTitle2: 'Evolucao por Segmento (TWh)',
+    chartFn2: renderDemandaSegmentosChart,
     sampleRows: () => DATA.demanda.years.map((y,i) => ({ano:y, residencial:DATA.demanda.residencial[i], industrial:DATA.demanda.industrial[i], comercial:DATA.demanda.comercial[i], outros:DATA.demanda.outros[i]}))
   },
   'se-reservatorios': {
@@ -1049,12 +1103,15 @@ const SECTIONS = {
   },
   'pg-global': {
     title: 'Producao Global e Brent',
-    subtitle: 'Producao mundial (Mb/d) e preco Brent (US$/bbl)',
+    subtitle: 'Producao e demanda mundial (Mb/d) e preco Brent (US$/bbl) — historico e projecoes',
     sector: 'petroleo',
-    fields: [{name:'ano',label:'Ano',type:'number',placeholder:'2024'},{name:'producao',label:'Producao (Mb/d)',type:'number',placeholder:'102.5'},{name:'brent',label:'Brent (US$)',type:'number',placeholder:'78.5'}],
-    sources: ['OPEC','CBIE'],
+    fields: [{name:'ano',label:'Ano',type:'number',placeholder:'2025'},{name:'producao',label:'Producao (Mb/d)',type:'number',placeholder:'103.8'},{name:'demanda',label:'Demanda (Mb/d)',type:'number',placeholder:'103.8'},{name:'brent',label:'Brent (US$)',type:'number',placeholder:'74.0'},{name:'tipo',label:'Tipo',type:'select',options:['Realizado','Projecao']}],
+    sources: ['OPEC','IEA','CBIE'],
     chartFn: renderPgGlobalChart,
-    sampleRows: () => DATA.pgGlobal.years.map((y,i) => ({ano:y, producao:DATA.pgGlobal.production[i], brent:DATA.pgGlobal.brent[i]}))
+    sampleRows: () => [
+      ...DATA.pgGlobal.years.map((y,i) => ({ano:y, producao:DATA.pgGlobal.production[i], demanda:DATA.pgGlobal.demanda[i], brent:DATA.pgGlobal.brent[i], tipo:'Realizado'})),
+      ...DATA.pgGlobal.yearsProj.map((y,i) => ({ano:y, producao:DATA.pgGlobal.productionProj[i], demanda:DATA.pgGlobal.demandaProj[i], brent:DATA.pgGlobal.brentProj[i], tipo:'Projecao'}))
+    ]
   },
   'pg-brasil': {
     title: 'Producao Brasil',
@@ -1067,21 +1124,29 @@ const SECTIONS = {
   },
   'pg-consumo': {
     title: 'Consumo e Refino',
-    subtitle: 'Demanda vs capacidade de refino (kbpd)',
+    subtitle: 'Demanda vs capacidade de refino (kbpd) — historico e projecoes',
     sector: 'petroleo',
-    fields: [{name:'ano',label:'Ano',type:'number',placeholder:'2024'},{name:'demanda',label:'Demanda',type:'number',placeholder:'2500'},{name:'capacidade',label:'Capacidade',type:'number',placeholder:'2350'},{name:'cap_imports',label:'Cap+Imports',type:'number',placeholder:'2630'}],
-    sources: ['ANP','CBIE'],
+    fields: [{name:'ano',label:'Ano',type:'number',placeholder:'2025'},{name:'demanda',label:'Demanda',type:'number',placeholder:'2525'},{name:'capacidade',label:'Capacidade',type:'number',placeholder:'2360'},{name:'cap_imports',label:'Cap+Imports',type:'number',placeholder:'2645'},{name:'tipo',label:'Tipo',type:'select',options:['Realizado','Projecao']}],
+    sources: ['ANP','IEA','CBIE'],
     chartFn: renderPgConsumoChart,
-    sampleRows: () => DATA.pgConsumo.years.map((y,i) => ({ano:y, demanda:DATA.pgConsumo.demanda[i], capacidade:DATA.pgConsumo.capacidade[i], cap_imports:DATA.pgConsumo.capImports[i]}))
+    sampleRows: () => [
+      ...DATA.pgConsumo.years.map((y,i) => ({ano:y, demanda:DATA.pgConsumo.demanda[i], capacidade:DATA.pgConsumo.capacidade[i], cap_imports:DATA.pgConsumo.capImports[i], tipo:'Realizado'})),
+      ...DATA.pgConsumo.yearsProj.map((y,i) => ({ano:y, demanda:DATA.pgConsumo.demandaProj[i], capacidade:DATA.pgConsumo.capacidadeProj[i], cap_imports:DATA.pgConsumo.capImportsProj[i], tipo:'Projecao'}))
+    ]
   },
   'pg-precos': {
     title: 'Precos e Vendas',
-    subtitle: 'Precos de combustiveis por ano (R$/L)',
+    subtitle: 'Precos (R$/L) e vendas (mil m³) de combustiveis — historico e projecoes',
     sector: 'petroleo',
-    fields: [{name:'ano',label:'Ano',type:'number',placeholder:'2024'},{name:'gasolina',label:'Gasolina',type:'number',placeholder:'5.89'},{name:'diesel',label:'Diesel',type:'number',placeholder:'5.78'},{name:'etanol',label:'Etanol',type:'number',placeholder:'3.65'},{name:'ciclo_otto',label:'Ciclo Otto',type:'number',placeholder:'5.15'}],
+    fields: [{name:'ano',label:'Ano',type:'number',placeholder:'2025'},{name:'gasolina',label:'Gasolina (R$/L)',type:'number',placeholder:'5.65'},{name:'diesel',label:'Diesel (R$/L)',type:'number',placeholder:'5.55'},{name:'etanol',label:'Etanol (R$/L)',type:'number',placeholder:'3.55'},{name:'tipo',label:'Tipo',type:'select',options:['Realizado','Projecao']}],
     sources: ['ANP'],
     chartFn: renderPgPrecosChart,
-    sampleRows: () => DATA.pgPrecos.years.map((y,i) => ({ano:y, gasolina:DATA.pgPrecos.gasolina[i], diesel:DATA.pgPrecos.diesel[i], etanol:DATA.pgPrecos.etanol[i], ciclo_otto:DATA.pgPrecos.cicloOtto[i]}))
+    chartTitle2: 'Evolucao das Vendas de Combustiveis (mil m³)',
+    chartFn2: renderPgPrecosVendasChart,
+    sampleRows: () => [
+      ...DATA.pgPrecos.years.map((y,i) => ({ano:y, gasolina:DATA.pgPrecos.gasolina[i], diesel:DATA.pgPrecos.diesel[i], etanol:DATA.pgPrecos.etanol[i], tipo:'Realizado'})),
+      ...DATA.pgPrecos.yearsProj.map((y,i) => ({ano:y, gasolina:DATA.pgPrecos.gasolinaProj[i], diesel:DATA.pgPrecos.dieselProj[i], etanol:DATA.pgPrecos.etanolProj[i], tipo:'Projecao'}))
+    ]
   },
   'pg-gas': {
     title: 'Gas Natural',
@@ -1103,21 +1168,23 @@ const SECTIONS = {
   },
   'bc-acucar': {
     title: 'Acucar e Etanol',
-    subtitle: 'Moagem de cana (Mt) e mix (% acucar)',
+    subtitle: 'Moagem de cana (Mt), mix (% acucar) e precos do acucar — historico e projecoes',
     sector: 'biocombustiveis',
     fields: [{name:'ano',label:'Ano',type:'number',placeholder:'2024'},{name:'moagem',label:'Moagem (Mt)',type:'number',placeholder:'640'},{name:'mix_acucar',label:'Mix Acucar (%)',type:'number',placeholder:'42'}],
-    sources: ['CBIE'],
+    sources: ['CBIE','UNICA','CEPEA'],
     chartFn: renderBcAcucarChart,
+    chartTitle2: 'Precos do Acucar — Brasil (R$/sc 50kg) e NY 11 (US¢/lb)',
+    chartFn2: renderBcAcucarPrecosChart,
     sampleRows: () => DATA.bcAcucar.years.map((y,i) => ({ano:y, moagem:DATA.bcAcucar.moagem[i], mix_acucar:DATA.bcAcucar.mixAcucar[i]}))
   },
   'bc-precos': {
     title: 'Precos de Biocombustiveis',
-    subtitle: 'Projecao de precos (R$/L)',
+    subtitle: 'Projecao de precos — Biodiesel, HVO e SAF (R$/L)',
     sector: 'biocombustiveis',
-    fields: [{name:'ano',label:'Ano',type:'number',placeholder:'2030'},{name:'etanol',label:'Etanol',type:'number',placeholder:'3.53'},{name:'biodiesel',label:'Biodiesel',type:'number',placeholder:'4.67'},{name:'hvo',label:'HVO',type:'number',placeholder:'6.50'},{name:'saf',label:'SAF',type:'number',placeholder:'7.70'}],
+    fields: [{name:'ano',label:'Ano',type:'number',placeholder:'2030'},{name:'biodiesel',label:'Biodiesel',type:'number',placeholder:'4.67'},{name:'hvo',label:'HVO',type:'number',placeholder:'6.50'},{name:'saf',label:'SAF',type:'number',placeholder:'7.70'}],
     sources: ['ANP','CBIE'],
     chartFn: renderBcPrecosChart,
-    sampleRows: () => DATA.bcPrecos.years.map((y,i) => ({ano:y, etanol:DATA.bcPrecos.etanol[i], biodiesel:DATA.bcPrecos.biodiesel[i], hvo:DATA.bcPrecos.hvo[i], saf:DATA.bcPrecos.saf[i]}))
+    sampleRows: () => DATA.bcPrecos.years.map((y,i) => ({ano:y, biodiesel:DATA.bcPrecos.biodiesel[i], hvo:DATA.bcPrecos.hvo[i], saf:DATA.bcPrecos.saf[i]}))
   }
 };
 
@@ -1238,6 +1305,18 @@ function showSection(sectionId, el) {
     document.getElementById('topbarTitle').textContent = 'Agenda Semanal';
     document.getElementById('topbarSub').textContent = 'Agenda Legislativa Semanal do Setor Energetico';
     renderLegAgenda();
+  } else if (sectionId === 'leg-pg') {
+    document.getElementById('topbarTitle').textContent = 'Petroleo e Gas — Legislativo';
+    document.getElementById('topbarSub').textContent = 'Proposicoes e publicacoes DOU do setor';
+    renderLegSetor('leg-pg', 'Petroleo e Gas');
+  } else if (sectionId === 'leg-se') {
+    document.getElementById('topbarTitle').textContent = 'Setor Eletrico — Legislativo';
+    document.getElementById('topbarSub').textContent = 'Proposicoes e publicacoes DOU do setor';
+    renderLegSetor('leg-se', 'Setor Eletrico');
+  } else if (sectionId === 'leg-bc') {
+    document.getElementById('topbarTitle').textContent = 'Biocombustiveis / Energias Renovaveis — Legislativo';
+    document.getElementById('topbarSub').textContent = 'Proposicoes e publicacoes DOU do setor';
+    renderLegSetor('leg-bc', 'Biocombustiveis');
   } else if (sectionId === 'sys-imports') {
     document.getElementById('topbarTitle').textContent = 'Importacoes';
     document.getElementById('topbarSub').textContent = 'Historico de importacoes de dados';
@@ -1250,6 +1329,10 @@ function showSection(sectionId, el) {
     document.getElementById('topbarTitle').textContent = 'Relatorio de Feedbacks';
     document.getElementById('topbarSub').textContent = 'Todos os usuarios e seus feedbacks por secao';
     loadFbReport();
+  } else if (sectionId === 'pg-opr') {
+    document.getElementById('topbarTitle').textContent = 'OPR — Outlook de Precos e Refino';
+    document.getElementById('topbarSub').textContent = 'Defasagem Petrobras, Brent/WTI, IPCA e Custo de Oportunidade — dados ao vivo do banco';
+    renderOprDashboard();
   }
   if (typeof feedbackMode !== 'undefined' && feedbackMode && typeof FB_SECTIONS !== 'undefined' && FB_SECTIONS[sectionId]) {
     openAnnotation(sectionId);
@@ -1301,6 +1384,7 @@ function renderDataSection(sectionId) {
       + `<span class="source-status status-soon">Em breve</span></div>`;
   }).join('');
 
+  const canvasId2 = 'chart2-' + sectionId;
   container.innerHTML = `
     <!-- AREA 1: Preview do Dashboard -->
     <div class="card" style="margin-bottom:24px;">
@@ -1312,6 +1396,17 @@ function renderDataSection(sectionId) {
         <canvas id="${canvasId}"></canvas>
       </div>
     </div>
+
+    ${def.chartFn2 ? `<!-- AREA 1b: Segundo grafico -->
+    <div class="card" style="margin-bottom:24px;">
+      <div class="card-title">
+        ${def.chartTitle2 || 'Grafico Adicional'}
+        <span class="card-badge badge-preview">LIVE PREVIEW</span>
+      </div>
+      <div class="chart-container">
+        <canvas id="${canvasId2}"></canvas>
+      </div>
+    </div>` : ''}
 
     <!-- AREA 2: Entrada de Dados -->
     <div class="card" style="margin-bottom:24px;">
@@ -1385,9 +1480,10 @@ function renderDataSection(sectionId) {
     </div>
   `;
 
-  // Render chart and table
+  // Render chart(s) and table
   setTimeout(() => {
     def.chartFn(canvasId);
+    if (def.chartFn2) def.chartFn2(canvasId2);
     renderSectionTable(sectionId);
   }, 50);
 }
@@ -1595,36 +1691,135 @@ function renderCargaChart(canvasId) {
 
 function renderDemandaChart(canvasId) {
   const d = DATA.demanda;
+  const toTWh = v => v / 1000;
+  const total = d.years.map((_,i) =>
+    toTWh(d.residencial[i] + d.industrial[i] + d.comercial[i] + d.outros[i])
+  );
+
   makeChart(canvasId, {
     type:'bar',
     data:{
-      labels:d.years,
+      labels: d.years,
       datasets:[
-        {label:'Residencial',data:d.residencial,backgroundColor:'rgba(0,180,160,0.8)',stack:'s'},
-        {label:'Industrial',data:d.industrial,backgroundColor:'rgba(96,165,250,0.8)',stack:'s'},
-        {label:'Comercial',data:d.comercial,backgroundColor:'rgba(251,191,36,0.8)',stack:'s'},
-        {label:'Outros',data:d.outros,backgroundColor:'rgba(184,184,184,0.6)',stack:'s'}
+        { label:'Residencial', data:d.residencial.map(toTWh), backgroundColor:'rgba(0,180,160,0.75)',  borderRadius:4, stack:'s', order:2 },
+        { label:'Industrial',  data:d.industrial.map(toTWh),  backgroundColor:'rgba(96,165,250,0.75)', borderRadius:4, stack:'s', order:2 },
+        { label:'Comercial',   data:d.comercial.map(toTWh),   backgroundColor:'rgba(251,191,36,0.75)', borderRadius:4, stack:'s', order:2 },
+        { label:'Outros',      data:d.outros.map(toTWh),      backgroundColor:'rgba(184,184,184,0.6)', borderRadius:4, stack:'s', order:2 },
+        {
+          label:'Total', data:total, type:'line',
+          borderColor:'rgba(15,23,42,0.7)', borderWidth:2.5,
+          pointBackgroundColor:'rgba(15,23,42,0.9)', pointRadius:4, pointHoverRadius:6,
+          fill:false, yAxisID:'y', order:1
+        }
       ]
     },
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{stacked:true,ticks:{callback:v=>(v/1000).toFixed(0)+'k GWh'}},x:{stacked:true}}}
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ position:'top' },
+        tooltip:{
+          callbacks:{
+            afterBody: ctx => {
+              const i = ctx[0].dataIndex;
+              const t = total[i];
+              const seg = ctx[0].dataset.label !== 'Total'
+                ? ` (${((ctx[0].parsed.y / t)*100).toFixed(1)}% do total)`
+                : '';
+              return seg;
+            }
+          }
+        }
+      },
+      scales:{
+        y:  { stacked:true, ticks:{ callback:v=>v.toFixed(0)+' TWh' }, grid:{ color:'rgba(0,0,0,0.04)' } },
+        x:  { stacked:true }
+      }
+    }
+  });
+}
+
+function renderDemandaSegmentosChart(canvasId) {
+  const d = DATA.demanda;
+  const toTWh = v => v / 1000;
+
+  makeChart(canvasId, {
+    type:'line',
+    data:{
+      labels: d.years,
+      datasets:[
+        { label:'Industrial',  data:d.industrial.map(toTWh),  borderColor:'rgba(96,165,250,0.9)',  backgroundColor:'rgba(96,165,250,0.08)',  fill:true, borderWidth:2.5, pointRadius:4, tension:0.3 },
+        { label:'Residencial', data:d.residencial.map(toTWh), borderColor:'rgba(0,180,160,0.9)',   backgroundColor:'rgba(0,180,160,0.08)',   fill:true, borderWidth:2.5, pointRadius:4, tension:0.3 },
+        { label:'Comercial',   data:d.comercial.map(toTWh),   borderColor:'rgba(251,191,36,0.9)',  backgroundColor:'rgba(251,191,36,0.08)',  fill:true, borderWidth:2.5, pointRadius:4, tension:0.3 },
+        { label:'Outros',      data:d.outros.map(toTWh),      borderColor:'rgba(148,163,184,0.9)', backgroundColor:'rgba(148,163,184,0.08)', fill:true, borderWidth:2,   pointRadius:4, tension:0.3 },
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ position:'top' } },
+      scales:{
+        y:{ ticks:{ callback:v=>v.toFixed(0)+' TWh' }, grid:{ color:'rgba(0,0,0,0.04)' } }
+      }
+    }
   });
 }
 
 function renderReservatoriosChart(canvasId) {
   const d = DATA.reservatorios;
+  // A partir de Mai (índice 4) os valores são projeção
+  const projStart = 4;
+
+  function splitReal(arr) {
+    return [...arr.slice(0, projStart), ...Array(d.months.length - projStart).fill(null)];
+  }
+  function splitProj(arr) {
+    // repete o último ponto real para conectar a linha
+    return [...Array(projStart - 1).fill(null), arr[projStart - 1], ...arr.slice(projStart)];
+  }
+
+  const subsystems = [
+    { label:'SIN',   data:d.sin,   color:C.navy  },
+    { label:'Sul',   data:d.sul,   color:C.teal  },
+    { label:'SE/CO', data:d.seco,  color:C.amber },
+    { label:'NE',    data:d.ne,    color:C.red   },
+    { label:'Norte', data:d.norte, color:C.green },
+  ];
+
+  const datasets = [];
+  subsystems.forEach(s => {
+    datasets.push({
+      label: s.label,
+      data: splitReal(s.data),
+      borderColor: s.color, borderWidth: 2.5, pointRadius: 2, tension: 0.3
+    });
+    datasets.push({
+      label: s.label + ' (proj.)',
+      data: splitProj(s.data),
+      borderColor: s.color, borderWidth: 2, borderDash:[6,4], pointRadius: 2, tension: 0.3
+    });
+  });
+
   makeChart(canvasId, {
     type:'line',
-    data:{
-      labels:d.months,
-      datasets:[
-        {label:'SIN',data:d.sin,borderColor:C.navy,borderWidth:2.5,pointRadius:3},
-        {label:'Sul',data:d.sul,borderColor:C.teal,borderWidth:2,pointRadius:2},
-        {label:'SE/CO',data:d.seco,borderColor:C.amber,borderWidth:2,pointRadius:2},
-        {label:'NE',data:d.ne,borderColor:C.red,borderWidth:2,pointRadius:2},
-        {label:'Norte',data:d.norte,borderColor:C.green,borderWidth:2,pointRadius:2}
-      ]
-    },
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'}}}}
+    data:{ labels:d.months, datasets },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{
+          position:'top',
+          labels:{ filter: item => !item.text.includes('(proj.)') }
+        },
+        tooltip:{
+          callbacks:{
+            title: ctx => {
+              const lbl = ctx[0].dataset.label.replace(' (proj.)','');
+              const isProj = ctx[0].dataset.label.includes('(proj.)');
+              return lbl + (isProj ? ' — Projeção' : ' — Realizado');
+            }
+          }
+        }
+      },
+      scales:{ y:{ min:0, max:100, ticks:{callback:v=>v+'%'} } }
+    }
   });
 }
 
@@ -1689,16 +1884,57 @@ function renderPldChart(canvasId) {
 
 function renderPgGlobalChart(canvasId) {
   const d = DATA.pgGlobal;
+  const allYears = [...d.years, ...d.yearsProj];
+  const nR = d.years.length;
+  const nP = d.yearsProj.length;
+
+  // Producao: barras históricas + barras projeção (cor mais clara)
+  const prodReal = [...d.production, ...Array(nP).fill(null)];
+  const prodProj = [...Array(nR).fill(null), ...d.productionProj];
+
+  // Demanda global: linha sólida histórica + tracejada projeção (conectadas)
+  const demReal = [...d.demanda, ...Array(nP).fill(null)];
+  const demProj = [...Array(nR - 1).fill(null), d.demanda[nR - 1], ...d.demandaProj];
+
+  // Brent: linha sólida histórica + tracejada projeção (conectadas)
+  const brentReal = [...d.brent, ...Array(nP).fill(null)];
+  const brentProj = [...Array(nR - 1).fill(null), d.brent[nR - 1], ...d.brentProj];
+
   makeChart(canvasId, {
     type:'bar',
     data:{
-      labels:d.years,
+      labels: allYears,
       datasets:[
-        {label:'Producao (Mb/d)',data:d.production,backgroundColor:'rgba(0,180,160,0.7)',borderRadius:6,yAxisID:'y',order:2},
-        {label:'Brent (US$/bbl)',data:d.brent,type:'line',borderColor:C.amber,backgroundColor:C.amberAlpha,borderWidth:2.5,pointRadius:4,yAxisID:'y1',order:1}
+        { label:'Producao (Mb/d)',    data:prodReal, backgroundColor:'rgba(0,180,160,0.75)', borderRadius:6, yAxisID:'y', order:4 },
+        { label:'Projecao Producao',  data:prodProj, backgroundColor:'rgba(0,180,160,0.25)', borderRadius:6, borderColor:'rgba(0,180,160,0.5)', borderWidth:1.5, yAxisID:'y', order:4 },
+        { label:'Demanda Global',     data:demReal, type:'line', borderColor:C.blue, borderWidth:2.5, pointRadius:3, yAxisID:'y', order:2 },
+        { label:'Demanda (proj.)',    data:demProj, type:'line', borderColor:C.blue, borderWidth:2, borderDash:[6,4], pointRadius:2, yAxisID:'y', order:2 },
+        { label:'Brent (US$/bbl)',    data:brentReal, type:'line', borderColor:C.amber, borderWidth:2.5, pointRadius:4, yAxisID:'y1', order:1 },
+        { label:'Brent (proj.)',      data:brentProj, type:'line', borderColor:C.amber, borderWidth:2, borderDash:[6,4], pointRadius:2, yAxisID:'y1', order:1 },
       ]
     },
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{position:'left',ticks:{callback:v=>v+' Mb/d'}},y1:{position:'right',grid:{drawOnChartArea:false},ticks:{callback:v=>'US$ '+v}}}}
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{
+          position:'top',
+          labels:{ filter: item => !item.text.startsWith('Projecao') && !item.text.includes('(proj.)') }
+        },
+        tooltip:{
+          callbacks:{
+            title: ctx => {
+              const lbl = ctx[0].dataset.label.replace('Projecao ','').replace(' (proj.)','');
+              const isProj = ctx[0].dataset.label.includes('proj') || ctx[0].dataset.label.startsWith('Projecao');
+              return lbl + (isProj ? ' — Projeção' : ' — Realizado');
+            }
+          }
+        }
+      },
+      scales:{
+        y:  { position:'left',  ticks:{ callback:v=>v+' Mb/d' }, grid:{ color:'rgba(0,0,0,0.04)' } },
+        y1: { position:'right', grid:{ drawOnChartArea:false }, ticks:{ callback:v=>'US$ '+v } }
+      }
+    }
   });
 }
 
@@ -1719,34 +1955,127 @@ function renderPgBrasilChart(canvasId) {
 
 function renderPgConsumoChart(canvasId) {
   const d = DATA.pgConsumo;
+  const allYears = [...d.years, ...d.yearsProj];
+  const nR = d.years.length;
+  const nP = d.yearsProj.length;
+
+  // Demanda: barras históricas + barras projeção mais claras
+  const demReal = [...d.demanda, ...Array(nP).fill(null)];
+  const demProj = [...Array(nR).fill(null), ...d.demandaProj];
+
+  // Capacidade: linha sólida + tracejada (conectadas)
+  const capReal = [...d.capacidade, ...Array(nP).fill(null)];
+  const capProj = [...Array(nR - 1).fill(null), d.capacidade[nR - 1], ...d.capacidadeProj];
+
+  // Cap + Imports: linha tracejada histórica + tracejada projeção (conectadas)
+  const impReal = [...d.capImports, ...Array(nP).fill(null)];
+  const impProj = [...Array(nR - 1).fill(null), d.capImports[nR - 1], ...d.capImportsProj];
+
   makeChart(canvasId, {
     type:'bar',
     data:{
-      labels:d.years,
+      labels: allYears,
       datasets:[
-        {label:'Demanda',data:d.demanda,backgroundColor:'rgba(96,165,250,0.7)',borderRadius:6,order:2},
-        {label:'Capacidade',data:d.capacidade,type:'line',borderColor:C.red,borderWidth:2.5,pointRadius:3,order:1},
-        {label:'Cap. + Importacoes',data:d.capImports,type:'line',borderColor:C.green,borderWidth:2.5,pointRadius:3,borderDash:[5,3],order:1}
+        { label:'Demanda',           data:demReal, backgroundColor:'rgba(96,165,250,0.75)', borderRadius:6, order:3 },
+        { label:'Projecao Demanda',  data:demProj, backgroundColor:'rgba(96,165,250,0.25)', borderRadius:6, borderColor:'rgba(96,165,250,0.5)', borderWidth:1.5, order:3 },
+        { label:'Capacidade',        data:capReal, type:'line', borderColor:C.red,   borderWidth:2.5, pointRadius:3, order:1 },
+        { label:'Capacidade (proj.)',data:capProj, type:'line', borderColor:C.red,   borderWidth:2,   borderDash:[6,4], pointRadius:2, order:1 },
+        { label:'Cap. + Importacoes',data:impReal, type:'line', borderColor:C.green, borderWidth:2.5, pointRadius:3, order:1 },
+        { label:'Cap. + Imp. (proj.)',data:impProj, type:'line', borderColor:C.green, borderWidth:2,  borderDash:[6,4], pointRadius:2, order:1 },
       ]
     },
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{ticks:{callback:v=>v+' kbpd'}}}}
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{
+          position:'top',
+          labels:{ filter: item => !item.text.startsWith('Projecao') && !item.text.includes('(proj.)') }
+        },
+        tooltip:{
+          callbacks:{
+            title: ctx => {
+              const lbl = ctx[0].dataset.label.replace('Projecao ','').replace(' (proj.)','');
+              const isProj = ctx[0].dataset.label.includes('proj') || ctx[0].dataset.label.startsWith('Projecao');
+              return lbl + (isProj ? ' — Projeção' : ' — Realizado');
+            }
+          }
+        }
+      },
+      scales:{ y:{ ticks:{ callback:v=>v+' kbpd' }, grid:{ color:'rgba(0,0,0,0.04)' } } }
+    }
   });
 }
 
 function renderPgPrecosChart(canvasId) {
   const d = DATA.pgPrecos;
+  const allYears = [...d.years, ...d.yearsProj];
+  const nR = d.years.length;
+  const nP = d.yearsProj.length;
+
+  function splitReal(arr) { return [...arr, ...Array(nP).fill(null)]; }
+  function splitProj(arr, proj) { return [...Array(nR - 1).fill(null), arr[nR - 1], ...proj]; }
+
+  makeChart(canvasId, {
+    type:'line',
+    data:{
+      labels: allYears,
+      datasets:[
+        { label:'Gasolina',        data:splitReal(d.gasolina),             borderColor:C.teal,   borderWidth:2.5, pointRadius:3, tension:0.3 },
+        { label:'Gasolina (proj.)',data:splitProj(d.gasolina,d.gasolinaProj), borderColor:C.teal,  borderWidth:2, borderDash:[6,4], pointRadius:2, tension:0.3 },
+        { label:'Diesel',          data:splitReal(d.diesel),               borderColor:C.blue,   borderWidth:2.5, pointRadius:3, tension:0.3 },
+        { label:'Diesel (proj.)',  data:splitProj(d.diesel,d.dieselProj),  borderColor:C.blue,   borderWidth:2, borderDash:[6,4], pointRadius:2, tension:0.3 },
+        { label:'Etanol',          data:splitReal(d.etanol),               borderColor:C.green,  borderWidth:2.5, pointRadius:3, tension:0.3 },
+        { label:'Etanol (proj.)',  data:splitProj(d.etanol,d.etanolProj),  borderColor:C.green,  borderWidth:2, borderDash:[6,4], pointRadius:2, tension:0.3 },
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ position:'top', labels:{ filter: item => !item.text.includes('(proj.)') } },
+        tooltip:{ callbacks:{ title: ctx => { const lbl = ctx[0].dataset.label.replace(' (proj.)',''); return lbl + (ctx[0].dataset.label.includes('proj') ? ' — Projeção' : ' — Realizado'); } } }
+      },
+      scales:{ y:{ ticks:{ callback:v=>'R$ '+v.toFixed(2) }, grid:{ color:'rgba(0,0,0,0.04)' } } }
+    }
+  });
+}
+
+function renderPgPrecosVendasChart(canvasId) {
+  const d = DATA.pgPrecos;
+  const allYears = [...d.vendasYears, ...d.vendasYearsProj];
+  const nR = d.vendasYears.length;
+  const nP = d.vendasYearsProj.length;
+
+  const gasReal  = [...d.vendasGasolina, ...Array(nP).fill(null)];
+  const gasProj  = [...Array(nR).fill(null), ...d.vendasGasolinaProj];
+  const dslReal  = [...d.vendasDiesel,   ...Array(nP).fill(null)];
+  const dslProj  = [...Array(nR).fill(null), ...d.vendasDieselProj];
+  const etaReal  = [...d.vendasEtanol,   ...Array(nP).fill(null)];
+  const etaProj  = [...Array(nR).fill(null), ...d.vendasEtanolProj];
+
   makeChart(canvasId, {
     type:'bar',
     data:{
-      labels:d.years,
+      labels: allYears,
       datasets:[
-        {label:'Gasolina',data:d.gasolina,backgroundColor:'rgba(0,180,160,0.75)',borderRadius:4},
-        {label:'Diesel',data:d.diesel,backgroundColor:'rgba(96,165,250,0.75)',borderRadius:4},
-        {label:'Etanol',data:d.etanol,backgroundColor:'rgba(52,211,153,0.75)',borderRadius:4},
-        {label:'Ciclo Otto',data:d.cicloOtto,backgroundColor:'rgba(251,191,36,0.75)',borderRadius:4}
+        { label:'Gasolina',          data:gasReal, backgroundColor:'rgba(0,180,160,0.75)',  borderRadius:5, stack:'s' },
+        { label:'Projecao Gasolina', data:gasProj, backgroundColor:'rgba(0,180,160,0.28)',  borderRadius:5, stack:'s' },
+        { label:'Diesel',            data:dslReal, backgroundColor:'rgba(96,165,250,0.75)', borderRadius:5, stack:'s' },
+        { label:'Projecao Diesel',   data:dslProj, backgroundColor:'rgba(96,165,250,0.28)', borderRadius:5, stack:'s' },
+        { label:'Etanol',            data:etaReal, backgroundColor:'rgba(52,211,153,0.75)', borderRadius:5, stack:'s' },
+        { label:'Projecao Etanol',   data:etaProj, backgroundColor:'rgba(52,211,153,0.28)', borderRadius:5, stack:'s' },
       ]
     },
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{ticks:{callback:v=>'R$ '+v.toFixed(2)}}}}
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ position:'top', labels:{ filter: item => !item.text.startsWith('Projecao') } },
+        tooltip:{ callbacks:{ title: ctx => { const lbl = ctx[0].dataset.label.replace('Projecao ',''); return lbl + (ctx[0].dataset.label.startsWith('Projecao') ? ' — Projeção' : ' — Realizado'); } } }
+      },
+      scales:{
+        y:{ stacked:true, ticks:{ callback:v=>(v/1000).toFixed(0)+'k m³' }, grid:{ color:'rgba(0,0,0,0.04)' } },
+        x:{ stacked:true }
+      }
+    }
   });
 }
 
@@ -1797,6 +2126,40 @@ function renderBcAcucarChart(canvasId) {
   });
 }
 
+function renderBcAcucarPrecosChart(canvasId) {
+  const d = DATA.bcAcucar;
+  const allYears = [...d.precoYears, ...d.precoYearsProj];
+  const nR = d.precoYears.length;
+  const nP = d.precoYearsProj.length;
+
+  function splitReal(arr) { return [...arr, ...Array(nP).fill(null)]; }
+  function splitProj(arr, proj) { return [...Array(nR - 1).fill(null), arr[nR - 1], ...proj]; }
+
+  makeChart(canvasId, {
+    type:'line',
+    data:{
+      labels: allYears,
+      datasets:[
+        { label:'Brasil (R$/sc)',        data:splitReal(d.precoBrasil),              borderColor:C.teal,  backgroundColor:C.tealAlpha,  fill:false, borderWidth:2.5, pointRadius:4, tension:0.3, yAxisID:'y'  },
+        { label:'Brasil (proj.)',        data:splitProj(d.precoBrasil,d.precoBrasilProj), borderColor:C.teal, fill:false, borderWidth:2, borderDash:[6,4], pointRadius:2, tension:0.3, yAxisID:'y'  },
+        { label:'NY 11 (US¢/lb)',        data:splitReal(d.precoNY11),                borderColor:C.amber, backgroundColor:C.amberAlpha, fill:false, borderWidth:2.5, pointRadius:4, tension:0.3, yAxisID:'y1' },
+        { label:'NY 11 (proj.)',         data:splitProj(d.precoNY11,d.precoNY11Proj),borderColor:C.amber, fill:false, borderWidth:2, borderDash:[6,4], pointRadius:2, tension:0.3, yAxisID:'y1' },
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ position:'top', labels:{ filter: item => !item.text.includes('(proj.)') } },
+        tooltip:{ callbacks:{ title: ctx => { const lbl = ctx[0].dataset.label.replace(' (proj.)',''); return lbl + (ctx[0].dataset.label.includes('proj') ? ' — Projeção' : ' — Realizado'); } } }
+      },
+      scales:{
+        y:  { position:'left',  ticks:{ callback:v=>'R$ '+v },        title:{ display:true, text:'R$/sc 50kg' } },
+        y1: { position:'right', grid:{ drawOnChartArea:false }, ticks:{ callback:v=>v+'¢' }, title:{ display:true, text:'US¢/lb' } }
+      }
+    }
+  });
+}
+
 function renderBcPrecosChart(canvasId) {
   const d = DATA.bcPrecos;
   makeChart(canvasId, {
@@ -1804,13 +2167,12 @@ function renderBcPrecosChart(canvasId) {
     data:{
       labels:d.years,
       datasets:[
-        {label:'Etanol',data:d.etanol,borderColor:C.green,borderWidth:2.5,pointRadius:4},
-        {label:'Biodiesel',data:d.biodiesel,borderColor:C.teal,borderWidth:2.5,pointRadius:4},
-        {label:'HVO',data:d.hvo,borderColor:C.amber,borderWidth:2.5,pointRadius:4},
-        {label:'SAF',data:d.saf,borderColor:C.purple,borderWidth:2.5,pointRadius:4}
+        {label:'Biodiesel', data:d.biodiesel, borderColor:C.teal,   borderWidth:2.5, pointRadius:4, tension:0.3},
+        {label:'HVO',       data:d.hvo,       borderColor:C.amber,  borderWidth:2.5, pointRadius:4, tension:0.3},
+        {label:'SAF',       data:d.saf,       borderColor:C.purple, borderWidth:2.5, pointRadius:4, tension:0.3}
       ]
     },
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{ticks:{callback:v=>'R$ '+v.toFixed(2)}}}}
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'top'}}, scales:{y:{ticks:{callback:v=>'R$ '+v.toFixed(2)}}}}
   });
 }
 
@@ -1913,6 +2275,225 @@ function renderConfigSection() {
       </div>
     </div>
   `;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// OPR — OUTLOOK DE PRECOS E REFINO  (8 graficos do "Energia em Foco")
+// Dados ao vivo via Supabase REST API
+// ═══════════════════════════════════════════════════════════════════════════
+const OPR_FMT = {
+  brl: v => v == null ? '—' : 'R$ ' + Number(v).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}),
+  usd: v => v == null ? '—' : 'US$ ' + Number(v).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}),
+  bi:  v => v == null ? '—' : 'R$ ' + Number(v).toLocaleString('pt-BR', {minimumFractionDigits:1, maximumFractionDigits:1}) + ' bi',
+  pct: v => v == null ? '—' : (Number(v) * 100).toFixed(1) + '%',
+  num: v => v == null ? '—' : Number(v).toLocaleString('pt-BR', {minimumFractionDigits:1, maximumFractionDigits:1})
+};
+
+async function oprFetch(table, params = '') {
+  const { data, error } = await fbSupabase.from(table).select(params || '*').order('ano',{ascending:true}).order('mes',{ascending:true}).limit(20000);
+  if (error) { console.error(`[OPR] erro em ${table}:`, error); return []; }
+  return data || [];
+}
+
+function oprDateLabels(rows) {
+  const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  return rows.map(r => {
+    if (r.data) { const d = new Date(r.data); return meses[d.getMonth()] + '/' + String(d.getFullYear()).slice(2); }
+    return meses[(r.mes||1)-1] + '/' + String(r.ano||0).slice(2);
+  });
+}
+
+function renderOprDashboard() {
+  const c = document.getElementById('sec-pg-opr');
+  c.innerHTML = `
+    <!-- KPI cards -->
+    <div class="grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;" id="oprKpis">
+      <div class="card" style="padding:18px;"><div style="font-size:11px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Saldo Acumulado desde 2003</div><div style="font-size:24px;font-weight:700;color:var(--red-400);" id="kpiAcumTotal">—</div><div style="font-size:11px;color:var(--gray-400);margin-top:4px;">Custo de Oportunidade Petrobras</div></div>
+      <div class="card" style="padding:18px;"><div style="font-size:11px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Acumulado desde 2011</div><div style="font-size:24px;font-weight:700;color:var(--red-400);" id="kpiAcum2011">—</div><div style="font-size:11px;color:var(--gray-400);margin-top:4px;" id="kpiAcum2011Detail">Política de paridade</div></div>
+      <div class="card" style="padding:18px;"><div style="font-size:11px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Nova Política (desde mai/2023)</div><div style="font-size:24px;font-weight:700;color:var(--red-400);" id="kpiAcum2023">—</div><div style="font-size:11px;color:var(--gray-400);margin-top:4px;" id="kpiAcum2023Detail">Saldo da nova estratégia</div></div>
+      <div class="card" style="padding:18px;"><div style="font-size:11px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Brent (último mês)</div><div style="font-size:24px;font-weight:700;color:var(--navy-900);" id="kpiBrent">—</div><div style="font-size:11px;color:var(--gray-400);margin-top:4px;" id="kpiBrentDetail">US$/barril</div></div>
+    </div>
+
+    <!-- Gráfico 8: Saldo Petrobras (FLAGSHIP — em cima e largo) -->
+    <div class="card" style="margin-bottom:24px;">
+      <div class="card-title">Saldo Líquido Acumulado pela Petrobras &mdash; Defasagem dos Preços (R$ bilhões)<span class="card-badge badge-live">DEFASAGEM</span></div>
+      <div class="chart-container" style="height:320px;"><canvas id="oprChart8"></canvas></div>
+      <div style="font-size:11px;color:var(--gray-400);margin-top:8px;">Fontes: Banco Central, ANP e EIA. Dados mensais agregados a partir de série diária 2003-2026.</div>
+    </div>
+
+    <!-- Linha 1: Brent/WTI + IPCA Produtor -->
+    <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;">
+      <div class="card">
+        <div class="card-title">Brent &amp; WTI &mdash; Preços Mensais (US$/bbl)<span class="card-badge badge-live">G1</span></div>
+        <div class="chart-container" style="height:260px;"><canvas id="oprChart1"></canvas></div>
+        <div style="font-size:11px;color:var(--gray-400);margin-top:6px;">Fonte: EIA, IPE, NYMEX (média mensal de cotações diárias)</div>
+      </div>
+      <div class="card">
+        <div class="card-title">IPCA &times; Preços ao Produtor (base 2016=100)<span class="card-badge badge-live">G5</span></div>
+        <div class="chart-container" style="height:260px;"><canvas id="oprChart5"></canvas></div>
+        <div style="font-size:11px;color:var(--gray-400);margin-top:6px;">Fontes: ANP, IBGE e Petrobras</div>
+      </div>
+    </div>
+
+    <!-- Linha 2: Defasagem Diesel Imp + Gasolina Exp -->
+    <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;">
+      <div class="card">
+        <div class="card-title">Diesel &mdash; Paridade de Importação (R$/L)<span class="card-badge badge-live">G2</span></div>
+        <div class="chart-container" style="height:260px;"><canvas id="oprChart2"></canvas></div>
+        <div style="font-size:11px;color:var(--gray-400);margin-top:6px;">Petrobras vs Golfo do México</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Gasolina &mdash; Paridade de Exportação (R$/L)<span class="card-badge badge-live">G3</span></div>
+        <div class="chart-container" style="height:260px;"><canvas id="oprChart3"></canvas></div>
+        <div style="font-size:11px;color:var(--gray-400);margin-top:6px;">Petrobras vs Golfo do México</div>
+      </div>
+    </div>
+
+    <!-- Linha 3: Defasagem Gasolina Imp + IPCA Consumidor -->
+    <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;">
+      <div class="card">
+        <div class="card-title">Gasolina &mdash; Paridade de Importação (R$/L)<span class="card-badge badge-live">G4</span></div>
+        <div class="chart-container" style="height:260px;"><canvas id="oprChart4"></canvas></div>
+        <div style="font-size:11px;color:var(--gray-400);margin-top:6px;">Petrobras vs Golfo do México</div>
+      </div>
+      <div class="card">
+        <div class="card-title">IPCA &times; Preços ao Consumidor (base 2016=100)<span class="card-badge badge-live">G6</span></div>
+        <div class="chart-container" style="height:260px;"><canvas id="oprChart6"></canvas></div>
+        <div style="font-size:11px;color:var(--gray-400);margin-top:6px;">Fontes: ANP, IBGE — dados ANP até dez/2021</div>
+      </div>
+    </div>
+
+    <!-- Linha 4: GLP P-13 (placeholder) -->
+    <div class="card" style="margin-bottom:24px;border:2px dashed var(--gray-200);background:var(--gray-50);">
+      <div class="card-title">GLP P-13 &mdash; Paridade de Importação (US$/kg)<span class="card-badge" style="background:var(--amber-400);color:#fff;">G7 &mdash; EM CONSTRUÇÃO</span></div>
+      <div style="padding:24px;text-align:center;color:var(--gray-400);">
+        <div style="font-size:14px;font-weight:600;margin-bottom:8px;">⚠ Série temporal de GLP CIF importado e P-13 produtor pendente</div>
+        <div style="font-size:13px;">Fontes esperadas: SECEX/MDIC (importação CIF) + ANP (P-13 mensal). Será populada em próxima edição.</div>
+      </div>
+    </div>
+  `;
+
+  setTimeout(() => loadOprData(), 50);
+}
+
+async function loadOprData() {
+  try {
+    // Carregar TODAS as 4 tabelas em paralelo
+    const [brent, indices, precos, custo] = await Promise.all([
+      oprFetch('opr_brent_wti_mensal',          'ano,mes,brent_usd_bbl,wti_usd_bbl'),
+      oprFetch('opr_indices_precos_mensal',     'ano,mes,ipca_index,gasolina_produtor_index,diesel_produtor_index,gasolina_consumidor_index,diesel_consumidor_index'),
+      oprFetch('opr_precos_mensal',             'ano,mes,produto,tipo_paridade,preco_golfo_rs_litro,preco_petrobras_rs_litro,diferenca_rs_litro'),
+      oprFetch('opr_custo_oportunidade_mensal', 'ano,mes,saldo_gasolina_rs_mn,saldo_diesel_rs_mn,saldo_total_rs_mn,saldo_acum_desde_2011_rs_mn,saldo_acum_desde_2023_rs_mn')
+    ]);
+
+    // ─── KPIs ───
+    const totalAcum     = custo.reduce((s,r)=>s + (r.saldo_total_rs_mn||0), 0) / 1000;
+    const ult = custo[custo.length-1] || {};
+    const acum2011 = (ult.saldo_acum_desde_2011_rs_mn||0) / 1000;
+    const acum2023 = (ult.saldo_acum_desde_2023_rs_mn||0) / 1000;
+    const gasAcum2011 = custo.filter(r=>r.ano>=2011).reduce((s,r)=>s+(r.saldo_gasolina_rs_mn||0),0)/1000;
+    const dieAcum2011 = custo.filter(r=>r.ano>=2011).reduce((s,r)=>s+(r.saldo_diesel_rs_mn||0),0)/1000;
+    const ultBrent = brent[brent.length-1] || {};
+
+    document.getElementById('kpiAcumTotal').textContent  = OPR_FMT.bi(totalAcum);
+    document.getElementById('kpiAcum2011').textContent   = OPR_FMT.bi(acum2011);
+    document.getElementById('kpiAcum2011Detail').textContent = `gas ${OPR_FMT.bi(gasAcum2011)} | diesel ${OPR_FMT.bi(dieAcum2011)}`;
+    document.getElementById('kpiAcum2023').textContent   = OPR_FMT.bi(acum2023);
+    document.getElementById('kpiAcum2023Detail').textContent = ult.ano ? `Última atualização: ${String(ult.mes).padStart(2,'0')}/${ult.ano}` : '';
+    document.getElementById('kpiBrent').textContent      = OPR_FMT.usd(ultBrent.brent_usd_bbl);
+    document.getElementById('kpiBrentDetail').textContent= ultBrent.ano ? `${String(ultBrent.mes).padStart(2,'0')}/${ultBrent.ano} — WTI ${OPR_FMT.usd(ultBrent.wti_usd_bbl)}` : 'US$/barril';
+
+    // ─── Gráfico 1: Brent & WTI ───
+    const brent16 = brent.filter(r => r.ano >= 2016);
+    makeChart('oprChart1', {
+      type:'line',
+      data:{
+        labels: oprDateLabels(brent16),
+        datasets:[
+          {label:'WTI',   data:brent16.map(r=>r.wti_usd_bbl),   borderColor:C.blue,  backgroundColor:C.blueAlpha,  borderWidth:2, pointRadius:0, tension:.3, fill:false},
+          {label:'Brent', data:brent16.map(r=>r.brent_usd_bbl), borderColor:C.amber, backgroundColor:C.amberAlpha, borderWidth:2, pointRadius:0, tension:.3, fill:false}
+        ]
+      },
+      options:{responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
+        scales:{x:{ticks:{maxTicksLimit:10}}, y:{ticks:{callback:v=>'US$ '+v}}},
+        plugins:{tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: US$ ${Number(ctx.raw).toFixed(2)}/bbl`}}}}
+    });
+
+    // ─── Gráficos 2, 3, 4: Defasagem ───
+    const buildDefasagem = (canvasId, produto, paridade, titulo) => {
+      const data = precos.filter(r => r.produto===produto && r.tipo_paridade===paridade && r.ano>=2016);
+      makeChart(canvasId, {
+        type:'line',
+        data:{
+          labels: oprDateLabels(data),
+          datasets:[
+            {label:'Golfo (Paridade)', data:data.map(r=>r.preco_golfo_rs_litro),     borderColor:C.blue,  borderWidth:2,   pointRadius:0, tension:.3},
+            {label:'Petrobras',        data:data.map(r=>r.preco_petrobras_rs_litro), borderColor:C.teal,  borderWidth:2,   pointRadius:0, tension:.3},
+            {label:'Diferença',        data:data.map(r=>r.diferenca_rs_litro),       borderColor:C.red,   borderWidth:1.5, pointRadius:0, tension:.3, borderDash:[4,3]}
+          ]
+        },
+        options:{responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
+          scales:{x:{ticks:{maxTicksLimit:10}}, y:{ticks:{callback:v=>'R$ '+Number(v).toFixed(2)}}},
+          plugins:{tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${OPR_FMT.brl(ctx.raw)}/L`}}}}
+      });
+    };
+    buildDefasagem('oprChart2', 'diesel',   'importacao');
+    buildDefasagem('oprChart3', 'gasolina', 'exportacao');
+    buildDefasagem('oprChart4', 'gasolina', 'importacao');
+
+    // ─── Gráfico 5: IPCA × Produtor (base 2016=100) ───
+    makeChart('oprChart5', {
+      type:'line',
+      data:{
+        labels: oprDateLabels(indices),
+        datasets:[
+          {label:'IPCA',          data:indices.map(r=>r.ipca_index),                 borderColor:C.gray,  borderWidth:2, pointRadius:0, tension:.3},
+          {label:'Gasolina A',    data:indices.map(r=>r.gasolina_produtor_index),    borderColor:C.amber, borderWidth:2, pointRadius:0, tension:.3},
+          {label:'Diesel',        data:indices.map(r=>r.diesel_produtor_index),      borderColor:C.red,   borderWidth:2, pointRadius:0, tension:.3}
+        ]
+      },
+      options:{responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
+        scales:{x:{ticks:{maxTicksLimit:10}}, y:{ticks:{callback:v=>Number(v).toFixed(0)}}},
+        plugins:{tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${Number(ctx.raw).toFixed(1)} (base 100)`}}}}
+    });
+
+    // ─── Gráfico 6: IPCA × Consumidor ───
+    const consum = indices.filter(r => r.gasolina_consumidor_index != null || r.diesel_consumidor_index != null);
+    makeChart('oprChart6', {
+      type:'line',
+      data:{
+        labels: oprDateLabels(consum),
+        datasets:[
+          {label:'IPCA',     data:consum.map(r=>r.ipca_index),                 borderColor:C.gray,  borderWidth:2, pointRadius:0, tension:.3},
+          {label:'Gasolina', data:consum.map(r=>r.gasolina_consumidor_index),  borderColor:C.amber, borderWidth:2, pointRadius:0, tension:.3},
+          {label:'Diesel',   data:consum.map(r=>r.diesel_consumidor_index),    borderColor:C.red,   borderWidth:2, pointRadius:0, tension:.3}
+        ]
+      },
+      options:{responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
+        scales:{x:{ticks:{maxTicksLimit:10}}, y:{ticks:{callback:v=>Number(v).toFixed(0)}}},
+        plugins:{tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${Number(ctx.raw).toFixed(1)} (base 100)`}}}}
+    });
+
+    // ─── Gráfico 8: Saldo Petrobras (R$ bi acumulado) ───
+    makeChart('oprChart8', {
+      type:'line',
+      data:{
+        labels: oprDateLabels(custo),
+        datasets:[{
+          label:'Saldo Acumulado',
+          data: custo.map((_,i,arr)=>arr.slice(0,i+1).reduce((s,r)=>s+(r.saldo_total_rs_mn||0),0)/1000),
+          borderColor:C.red, backgroundColor:'rgba(248,113,113,.15)', borderWidth:2.5, pointRadius:0, tension:.3, fill:true
+        }]
+      },
+      options:{responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
+        scales:{x:{ticks:{maxTicksLimit:15}}, y:{ticks:{callback:v=>'R$ '+Number(v).toLocaleString('pt-BR')+' bi'}}},
+        plugins:{tooltip:{callbacks:{label:ctx=>` Acumulado: ${OPR_FMT.bi(ctx.raw)}`}}}}
+    });
+
+  } catch (e) {
+    console.error('[OPR] Falha ao carregar dashboard:', e);
+    showToast('Erro ao carregar OPR: ' + e.message, 'error');
+  }
 }
 
 // ═══════════ TOAST NOTIFICATIONS ═══════════
@@ -2472,6 +3053,301 @@ function renderLegAgenda() {
   `;
 }
 
+// ═══════════ RENDER LEGISLACAO — POR SETOR ═══════════
+function renderLegSetor(sectionId, setor) {
+  const container = document.getElementById('sec-' + sectionId);
+  if (!container) return;
+
+  const projs = LEG_PROJETOS.filter(p => p.setor === setor);
+  const dous  = LEG_DOU.filter(d => d.setor === setor);
+
+  // Sector color
+  const setorColor = setor.includes('Petroleo') ? '#60A5FA' : setor.includes('Eletrico') ? '#FBBF24' : '#34D399';
+  const setorBg    = setor.includes('Petroleo') ? 'rgba(96,165,250,0.15)' : setor.includes('Eletrico') ? 'rgba(251,191,36,0.15)' : 'rgba(52,211,153,0.15)';
+
+  const altoImpacto = projs.filter(p => p.impacto === 'Alto');
+  const semana = '07/05/2026 a 13/05/2026';
+
+  // Bloco 1 — Agenda Semanal header
+  const hlItems = altoImpacto.slice(0, 3).map(p => `
+    <div class="lap-hl-item">
+      <span class="lap-hl-badge">ALTO</span>
+      <div>
+        <div class="lap-hl-text">${p.numero} — ${p.descricao.substring(0, 90)}${p.descricao.length > 90 ? '...' : ''}</div>
+        <div class="lap-hl-sub">${p.casa} | ${p.tipo} | ${p.situacao.substring(0, 60)}${p.situacao.length > 60 ? '...' : ''}</div>
+      </div>
+    </div>
+  `).join('');
+
+  // Bloco 2 — DOU timeline
+  const douSearch = `dou-search-${sectionId}`;
+  const douList   = `dou-list-${sectionId}`;
+
+  const douItems = dous.map(pub => `
+    <div style="display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--gray-100);position:relative;">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:${setorColor};border-radius:2px;"></div>
+      <div style="padding-left:16px;min-width:90px;">
+        <div style="background:var(--navy-900);color:var(--white);padding:5px 10px;border-radius:7px;font-size:11px;font-weight:600;text-align:center;white-space:nowrap;">${pub.data}</div>
+        <div style="font-size:10px;color:var(--gray-400);text-align:center;margin-top:4px;">${pub.secao}</div>
+      </div>
+      <div style="flex:1;">
+        <div style="font-size:14px;font-weight:600;color:var(--navy-900);margin-bottom:4px;">${pub.titulo}</div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:5px;flex-wrap:wrap;">
+          <span style="font-size:11px;color:var(--gray-400);">${pub.orgao}</span>
+          <span style="font-size:10px;color:var(--gray-300);">|</span>
+          <span style="font-size:11px;color:var(--gray-400);">${pub.edicao} &mdash; ${pub.pagina}</span>
+        </div>
+        <div style="font-size:13px;color:var(--gray-500);line-height:1.6;">${pub.resumo}</div>
+      </div>
+    </div>
+  `).join('');
+
+  const douEmpty = `<div style="padding:32px 0;text-align:center;color:var(--gray-300);font-size:14px;">Nenhuma publicacao DOU neste setor.</div>`;
+
+  // Bloco 3 — Proposicoes tabela
+  const tipoBadge = t => ({PL:'badge-green',PLP:'badge-blue',PDL:'badge-amber',MPV:'badge-red'}[t] || 'badge-green');
+  const impactoBadge = i => i === 'Alto' ? 'badge-red' : i === 'Medio' ? 'badge-amber' : 'badge-green';
+  const truncate = (s, n) => s.length > n ? s.substring(0, n) + '...' : s;
+
+  const propTableId = `prop-table-${sectionId}`;
+  const propBodyId  = `prop-body-${sectionId}`;
+
+  function buildRows(list) {
+    if (list.length === 0) return `<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--gray-300);font-style:italic;">Nenhuma proposicao neste setor.</td></tr>`;
+    return list.map((p, idx) => {
+      const realIdx = LEG_PROJETOS.indexOf(p);
+      return `
+        <tr class="leg-prop-row">
+          <td style="font-weight:600;color:var(--navy-900);white-space:nowrap;">${p.numero}</td>
+          <td><span class="badge ${tipoBadge(p.tipo)}">${p.tipo}</span></td>
+          <td style="font-size:12px;">${p.casa}</td>
+          <td style="font-size:12px;" title="${p.descricao}">${truncate(p.descricao, 80)}</td>
+          <td style="font-size:12px;" title="${p.situacao}">${truncate(p.situacao, 45)}</td>
+          <td>
+            <select class="leg-impacto-select" data-idx="${realIdx}" onchange="LEG_PROJETOS[${realIdx}].impacto=this.value;showToast('Impacto atualizado','success');" style="padding:4px 8px;border-radius:6px;border:1.5px solid var(--gray-200);font-size:11px;font-family:var(--font-body);font-weight:600;background:var(--white);cursor:pointer;">
+              <option value="Alto" ${p.impacto==='Alto'?'selected':''}>Alto</option>
+              <option value="Medio" ${p.impacto==='Medio'?'selected':''}>Medio</option>
+              <option value="Baixo" ${p.impacto==='Baixo'?'selected':''}>Baixo</option>
+            </select>
+          </td>
+          <td>
+            <div class="action-btns">
+              <button class="action-btn" title="Editar" onclick="showToast('Abrindo editor...','success')">&#9998;</button>
+              <button class="action-btn delete" title="Excluir" onclick="LEG_PROJETOS.splice(${realIdx},1);renderLegSetor('${sectionId}','${setor}');showToast('Proposicao removida','warning');">&#10005;</button>
+            </div>
+          </td>
+        </tr>`;
+    }).join('');
+  }
+
+  const tableRows = buildRows(projs);
+
+  container.innerHTML = `
+    <!-- Bloco 1 — Agenda Semanal -->
+    <div class="card leg-agenda-pinned" style="margin-bottom:24px;background:var(--navy-900);color:var(--white);border-radius:var(--radius);">
+      <div class="lap-header">
+        <div>
+          <div class="lap-title">${setor === 'Petroleo e Gas' ? 'Petroleo e Gas' : setor === 'Setor Eletrico' ? 'Setor Eletrico' : 'Biocombustiveis / Energias Renovaveis'}</div>
+          <div class="lap-week">Semana: ${semana}</div>
+        </div>
+        <div class="lap-stats">
+          <div class="lap-stat">
+            <div class="lap-stat-val">${projs.length}</div>
+            <div class="lap-stat-lbl">Proposicoes</div>
+          </div>
+          <div class="lap-stat">
+            <div class="lap-stat-val">${altoImpacto.length}</div>
+            <div class="lap-stat-lbl">Alto Impacto</div>
+          </div>
+          <div class="lap-stat">
+            <div class="lap-stat-val">${dous.length}</div>
+            <div class="lap-stat-lbl">Pub. DOU</div>
+          </div>
+        </div>
+      </div>
+      ${altoImpacto.length > 0 ? `
+      <div class="lap-highlights">
+        <div class="lap-hl-label">Proposicoes de Alto Impacto</div>
+        ${hlItems}
+      </div>` : ''}
+    </div>
+
+    <!-- Bloco 2 — Publicacoes DOU -->
+    <div class="card" style="margin-bottom:24px;">
+      <div class="card-title">
+        Publicacoes DOU
+        <span class="card-badge" style="background:${setorBg};color:${setorColor};border:1px solid ${setorColor}33;">${dous.length} PUBLICACOES</span>
+      </div>
+      <div style="margin-bottom:14px;">
+        <input class="leg-setor-search" type="text" id="${douSearch}" placeholder="Buscar publicacao por titulo..." oninput="
+          var q=this.value.toLowerCase();
+          document.querySelectorAll('#${douList} .dou-item').forEach(function(el){
+            el.style.display=el.dataset.titulo.includes(q)?'':'none';
+          });">
+      </div>
+      <div id="${douList}" style="max-height:500px;overflow-y:auto;">
+        ${dous.length === 0 ? douEmpty : dous.map(pub => `
+          <div class="dou-item" data-titulo="${pub.titulo.toLowerCase()}" style="display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--gray-100);position:relative;">
+            <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:${setorColor};border-radius:2px;"></div>
+            <div style="padding-left:16px;min-width:90px;">
+              <div style="background:var(--navy-900);color:var(--white);padding:5px 10px;border-radius:7px;font-size:11px;font-weight:600;text-align:center;white-space:nowrap;">${pub.data}</div>
+              <div style="font-size:10px;color:var(--gray-400);text-align:center;margin-top:4px;">${pub.secao}</div>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:14px;font-weight:600;color:var(--navy-900);margin-bottom:4px;">${pub.titulo}</div>
+              <div style="display:flex;gap:8px;align-items:center;margin-bottom:5px;flex-wrap:wrap;">
+                <span style="font-size:11px;color:var(--gray-400);">${pub.orgao}</span>
+                <span style="font-size:10px;color:var(--gray-300);">|</span>
+                <span style="font-size:11px;color:var(--gray-400);">${pub.edicao} &mdash; ${pub.pagina}</span>
+              </div>
+              <div style="font-size:13px;color:var(--gray-500);line-height:1.6;">${pub.resumo}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- Bloco 3 — Proposicoes em Andamento -->
+    <div class="card" style="margin-bottom:24px;">
+      <div class="card-title">
+        Proposicoes em Andamento
+        <span class="card-badge" style="background:${setorBg};color:${setorColor};border:1px solid ${setorColor}33;">${projs.length} PROPOSICOES</span>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:flex-end;">
+        <div class="form-group" style="margin-bottom:0;min-width:120px;">
+          <label>Tipo</label>
+          <select id="legSetorFilterTipo-${sectionId}" onchange="filterLegSetorTable('${sectionId}','${setor}')" style="padding:9px 12px;font-size:13px;border-radius:8px;">
+            <option value="">Todos</option>
+            <option value="PL">PL</option>
+            <option value="PLP">PLP</option>
+            <option value="PDL">PDL</option>
+            <option value="MPV">MPV</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom:0;min-width:150px;">
+          <label>Casa Legislativa</label>
+          <select id="legSetorFilterCasa-${sectionId}" onchange="filterLegSetorTable('${sectionId}','${setor}')" style="padding:9px 12px;font-size:13px;border-radius:8px;">
+            <option value="">Todas</option>
+            <option value="Camara">Camara</option>
+            <option value="Senado">Senado</option>
+            <option value="Aguardando">Aguardando</option>
+            <option value="Congresso">Congresso</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom:0;min-width:120px;">
+          <label>Impacto</label>
+          <select id="legSetorFilterImpacto-${sectionId}" onchange="filterLegSetorTable('${sectionId}','${setor}')" style="padding:9px 12px;font-size:13px;border-radius:8px;">
+            <option value="">Todos</option>
+            <option value="Alto">Alto</option>
+            <option value="Medio">Medio</option>
+            <option value="Baixo">Baixo</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom:0;flex:1;min-width:200px;">
+          <label>Buscar</label>
+          <input type="text" id="legSetorFilterSearch-${sectionId}" placeholder="Buscar por numero ou descricao..." oninput="filterLegSetorTable('${sectionId}','${setor}')" style="padding:9px 12px;font-size:13px;border-radius:8px;width:100%;border:1.5px solid var(--gray-200);border-radius:8px;font-family:var(--font-body);color:var(--navy-900);background:var(--white);outline:none;">
+        </div>
+      </div>
+      <div class="data-table-wrap" style="max-height:520px;">
+        <table class="data-table" id="${propTableId}">
+          <thead>
+            <tr>
+              <th>Numero</th>
+              <th>Tipo</th>
+              <th>Casa</th>
+              <th>Descricao</th>
+              <th>Situacao</th>
+              <th>Impacto</th>
+              <th style="width:70px;">Acoes</th>
+            </tr>
+          </thead>
+          <tbody id="${propBodyId}">${tableRows}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Bloco 4 — Entrada de Dados -->
+    <div class="card" style="margin-bottom:24px;">
+      <div class="card-title">Entrada de Dados</div>
+      <div class="input-split">
+        <div class="input-panel">
+          <div class="input-panel-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Adicionar Proposicao
+          </div>
+          <div class="input-panel-desc">Cadastre uma nova proposicao manualmente — setor: <strong>${setor === 'Petroleo e Gas' ? 'Petroleo e Gas' : setor === 'Setor Eletrico' ? 'Setor Eletrico' : 'Biocombustiveis'}</strong></div>
+          <form id="formAddProjetoPorSetor-${sectionId}" onsubmit="addLegProjetoPorSetor('${setor}','${sectionId}',event)">
+            <div class="form-group"><label>Numero</label><input type="text" name="numero" placeholder="PL nº 000/2026" required></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <div class="form-group"><label>Tipo</label><select name="tipo"><option>PL</option><option>PLP</option><option>PDL</option><option>MPV</option></select></div>
+              <div class="form-group"><label>Casa</label><select name="casa"><option>Camara</option><option>Senado</option><option>Aguardando</option><option>Congresso</option></select></div>
+            </div>
+            <div class="form-group"><label>Descricao</label><textarea name="descricao" rows="2" placeholder="Descreva a proposicao..." style="width:100%;padding:10px 12px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:13px;font-family:var(--font-body);resize:vertical;"></textarea></div>
+            <div class="form-group"><label>Situacao</label><textarea name="situacao" rows="2" placeholder="Situacao atual..." style="width:100%;padding:10px 12px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:13px;font-family:var(--font-body);resize:vertical;"></textarea></div>
+            <div class="form-group"><label>Impacto</label><select name="impacto"><option>Alto</option><option>Medio</option><option>Baixo</option></select></div>
+            <button type="submit" class="btn btn-teal">Adicionar Proposicao</button>
+          </form>
+        </div>
+        <div class="input-panel">
+          <div class="input-panel-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg>
+            Importar Arquivo
+          </div>
+          <div class="input-panel-desc">Importe proposicoes em lote via planilha Excel</div>
+          <div class="drop-zone" onclick="document.getElementById('legSetorFile-${sectionId}').click();"
+            ondragover="event.preventDefault();this.classList.add('dragover');"
+            ondragleave="this.classList.remove('dragover');"
+            ondrop="event.preventDefault();this.classList.remove('dragover');showToast('Arquivo recebido! Processando...','success');">
+            <div class="drop-zone-icon">&#128220;</div>
+            <div class="drop-zone-text">Arraste um arquivo .xlsx aqui</div>
+            <div class="drop-zone-hint">.xlsx, .xls — Proposicoes do setor</div>
+          </div>
+          <input type="file" id="legSetorFile-${sectionId}" accept=".xlsx,.xls" style="display:none;" onchange="showToast('Arquivo selecionado! Processando...','success');">
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function filterLegSetorTable(sectionId, setor) {
+  const tipo    = (document.getElementById('legSetorFilterTipo-' + sectionId) || {}).value || '';
+  const casa    = (document.getElementById('legSetorFilterCasa-' + sectionId) || {}).value || '';
+  const impacto = (document.getElementById('legSetorFilterImpacto-' + sectionId) || {}).value || '';
+  const search  = ((document.getElementById('legSetorFilterSearch-' + sectionId) || {}).value || '').toLowerCase();
+  const projs   = LEG_PROJETOS.filter(p => p.setor === setor);
+  const tbody   = document.getElementById('prop-body-' + sectionId);
+  if (!tbody) return;
+  const rows = tbody.querySelectorAll('tr');
+  rows.forEach((row, i) => {
+    const p = projs[i];
+    if (!p) { row.style.display = 'none'; return; }
+    let show = true;
+    if (tipo    && p.tipo    !== tipo)    show = false;
+    if (casa    && p.casa    !== casa)    show = false;
+    if (impacto && p.impacto !== impacto) show = false;
+    if (search  && !(p.numero.toLowerCase().includes(search) || p.descricao.toLowerCase().includes(search))) show = false;
+    row.style.display = show ? '' : 'none';
+  });
+}
+
+function addLegProjetoPorSetor(setor, sectionId, e) {
+  e.preventDefault();
+  const form = document.getElementById('formAddProjetoPorSetor-' + sectionId);
+  const fd = new FormData(form);
+  LEG_PROJETOS.push({
+    numero:   fd.get('numero'),
+    tipo:     fd.get('tipo'),
+    setor:    setor,
+    casa:     fd.get('casa'),
+    descricao:fd.get('descricao'),
+    situacao: fd.get('situacao'),
+    impacto:  fd.get('impacto')
+  });
+  form.reset();
+  renderLegSetor(sectionId, setor);
+  showToast('Proposicao adicionada com sucesso', 'success');
+}
+
 // ═══════════ FEEDBACK SYSTEM ═══════════
 
 const FB_SECTIONS = {
@@ -2490,9 +3366,9 @@ const FB_SECTIONS = {
   'bc-biodiesel':       'Biodiesel',
   'bc-acucar':          'Acucar e Etanol',
   'bc-precos':          'Precos de Biocombustiveis',
-  'leg-projetos':       'Projetos de Lei',
-  'leg-dou':            'Publicacoes DOU',
-  'leg-agenda':         'Agenda Semanal'
+  'leg-pg':             'Petroleo e Gas — Legislativo',
+  'leg-se':             'Setor Eletrico — Legislativo',
+  'leg-bc':             'Biocombustiveis — Legislativo'
 };
 
 // sector color map
@@ -2503,7 +3379,7 @@ const FB_COLORS = {
   'pg-global':'#60A5FA','pg-brasil':'#60A5FA','pg-consumo':'#60A5FA',
   'pg-precos':'#60A5FA','pg-gas':'#60A5FA',
   'bc-biodiesel':'#34D399','bc-acucar':'#34D399','bc-precos':'#34D399',
-  'leg-projetos':'#F87171','leg-dou':'#F87171','leg-agenda':'#F87171'
+  'leg-pg':'#F87171','leg-se':'#F87171','leg-bc':'#F87171'
 };
 
 let feedbackMode     = false;
@@ -2815,7 +3691,7 @@ const FB_GROUPS = [
   { label: 'Setor Eletrico', ids: ['se-carga','se-demanda','se-reservatorios','se-reserva','se-geracao','se-pld'] },
   { label: 'Petroleo e Gas', ids: ['pg-global','pg-brasil','pg-consumo','pg-precos','pg-gas'] },
   { label: 'Biocombustiveis', ids: ['bc-biodiesel','bc-acucar','bc-precos'] },
-  { label: 'Legislativo', ids: ['leg-projetos','leg-dou','leg-agenda'] },
+  { label: 'Legislativo', ids: ['leg-pg','leg-se','leg-bc'] },
 ];
 
 let fbrAllData = null;

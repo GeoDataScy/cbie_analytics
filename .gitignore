@@ -1,0 +1,39 @@
+# Vercel
+.vercel
+.vercelignore
+
+# Node
+node_modules/
+package-lock.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude / Cursor / agents
+.claude/
+
+# Python (notebooks de análise)
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Banco de dados — planilhas / dumps locais (não versionados)
+banco_de_dados/
+
+# Logs
+*.log
+/tmp/
+
+# Build outputs
+dist/
+build/
